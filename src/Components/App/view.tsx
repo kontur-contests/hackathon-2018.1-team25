@@ -160,8 +160,8 @@ export class App extends React.Component<AppDispatchProps, AppState> {
         };
 
         return {
-            x: -(center.x - x) / squareSize * 200,
-            y: -(center.y - y) / squareSize * 200,
+            x: -(center.x - x) / squareSize * 100,
+            y: -(center.y - y) / squareSize * 100,
         };
     }
 }

@@ -28,6 +28,7 @@ export type Character = {
     // 0 - 100
     hp: number;
     maxHp: number;
+    xp: number;
     lastShootTime: number;
 };
 
@@ -37,6 +38,7 @@ export type ShootCharacter = {
 
 export type WeaponBullet = {
     destination: PointCoordinates;
+    death: boolean;
 }
 
 export type UnitData = {
@@ -70,7 +72,7 @@ export type WeaponBulletName = UnitName.Piston;
 export const WeaponIntervals: {
     [key in WeaponBulletName]: number;
 } = {
-    [UnitName.Piston]: 2000,
+    [UnitName.Piston]: 1000,
 };
 
 export const defaultConstructorState: MyasoStore = {
@@ -86,6 +88,7 @@ export const defaultConstructorState: MyasoStore = {
             intersection: false,
             rotation: 0,
             lastShootTime: 0,
+            xp: 0,
         },
         {
             name: UnitName.Zombie,
@@ -93,8 +96,9 @@ export const defaultConstructorState: MyasoStore = {
             y: 0,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            maxHp: 5,
+            xp: 1,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,
@@ -105,8 +109,9 @@ export const defaultConstructorState: MyasoStore = {
             y: 80,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            maxHp: 5,
+            xp: 1,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,
@@ -117,8 +122,9 @@ export const defaultConstructorState: MyasoStore = {
             y: 100,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            xp: 1,
+            maxHp: 5,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,
@@ -129,8 +135,9 @@ export const defaultConstructorState: MyasoStore = {
             y: -50,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            maxHp: 5,
+            xp: 1,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,
@@ -141,8 +148,9 @@ export const defaultConstructorState: MyasoStore = {
             y: 50,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            maxHp: 5,
+            xp: 1,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,
@@ -153,8 +161,9 @@ export const defaultConstructorState: MyasoStore = {
             y: -70,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            maxHp: 5,
+            xp: 1,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,
@@ -165,8 +174,9 @@ export const defaultConstructorState: MyasoStore = {
             y: -70,
             width: 2,
             height: 2,
-            hp: 100,
-            maxHp: 100,
+            hp: 5,
+            maxHp: 5,
+            xp: 1,
             intersection: true,
             rotation: 45,
             lastShootTime: 0,

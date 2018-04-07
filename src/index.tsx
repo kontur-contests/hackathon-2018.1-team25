@@ -11,6 +11,7 @@ import { defaultConstructorState, MyasoStore, Unit, UnitName, WeaponIntervals } 
 import { UnitControllers } from './UnitControllers';
 import { UnitController } from './Units/UnitController';
 import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
+import { addXp } from './utils/playerInteractions';
 
 function createAnimaionConstoller(store: Store<MyasoStore>) {
     let lastTime = Date.now();
@@ -39,7 +40,32 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
             lastState = controller(key, diff * speed, unit, lastState);
         }
 
-        // check if monters are death
+        //check if death
+        lastState = {
+            ...lastState,
+            units: lastState.units.filter((unit: any) => {
+                const deathByHp = typeof unit.hp === 'number'
+                    && unit.hp <= 0
+                    && unit.name !== UnitName.Tower;
+                if (deathByHp) {
+                    const {
+                        level,
+                        xp,
+                    } = addXp(lastState.player, unit.xp);
+
+                    if (lastState.player.level !== level) {
+                        console.log('NEXT_LEVEL');
+                    }
+
+                    lastState.player.level = level;
+                    lastState.player.xp = xp;
+
+                    return false;
+                }
+
+                return unit.death !== true;
+            }),
+        };
 
         const nextState = clone(lastState);
 
@@ -62,7 +88,8 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     destination: shotPosition,
                     rotation: getAngleRelativeToOrigin(shotPosition),
                     name: nextState.weapon,
-                    intersection: false,
+                    intersection: true,
+                    death: false,
                 };
 
                 nextState.units.push(weaponBullet);
