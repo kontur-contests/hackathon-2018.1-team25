@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import {setHoverPositoin, setShotPositoin, setStore, toggleMenu, heal, revealWeapon} from './actions';
+import {setHoverPositoin, setShotPositoin, setStore, toggleMenu, heal, revealWeapon, chooseWeapon} from './actions';
 import {MyasoStore} from './MyasoStore';
 import {getTower} from './getters/getTower';
 
@@ -50,5 +50,11 @@ export const createConstructorReducer = (appState: MyasoStore) => createReducer<
                 money: state.player.money - weaponRevealData.cost,
             },
             weapon: weaponRevealData.weaponName,
+        };
+    })
+    .on(chooseWeapon, (state, weaponName): MyasoStore => {
+        return {
+            ...state,
+            weapon: weaponName,
         };
     });
