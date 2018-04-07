@@ -72,7 +72,47 @@ export type WeaponBulletName = UnitName.Piston;
 export const WeaponIntervals: {
     [key in WeaponBulletName]: number;
 } = {
-    [UnitName.Piston]: 1000,
+    [UnitName.Piston]: 500,
+};
+
+export const UnitSize: {
+    [key in UnitName]: Size;
+} = {
+    [UnitName.Zombie]: {
+        width:4,
+        height:4,
+    },
+    [UnitName.Piston]: {
+        width: 1,
+        height: 1,
+    },
+    [UnitName.Tower]: {
+        width: 9,
+        height: 9,
+    },
+};
+
+export const CharacterParams: {
+    [key in UnitName]: Character;
+} = {
+    [UnitName.Zombie]: {
+        hp:5,
+        maxHp:5,
+        xp: 1,
+        lastShootTime: 0,
+    },
+    [UnitName.Piston]: {
+        hp: 0,
+        maxHp: 0,
+        xp: 0,
+        lastShootTime: 0,
+    },
+    [UnitName.Tower]: {
+        hp: 0,
+        maxHp: 0,
+        xp: 0,
+        lastShootTime: 0,
+    },
 };
 
 export const defaultConstructorState: MyasoStore = {
@@ -81,105 +121,13 @@ export const defaultConstructorState: MyasoStore = {
             name: UnitName.Tower,
             x: -TOWER_SIZE / 2,
             y: -TOWER_SIZE / 2,
-            width: TOWER_SIZE,
-            height: TOWER_SIZE,
+            ...UnitSize.Tower,
             hp: 100,
             maxHp: 100,
             intersection: false,
             rotation: 0,
             lastShootTime: 0,
             xp: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: -50,
-            y: 0,
-            width: 2,
-            height: 2,
-            hp: 5,
-            maxHp: 5,
-            xp: 1,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: 50,
-            y: 80,
-            width: 2,
-            height: 2,
-            hp: 5,
-            maxHp: 5,
-            xp: 1,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: -40,
-            y: 100,
-            width: 2,
-            height: 2,
-            hp: 5,
-            xp: 1,
-            maxHp: 5,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: 100,
-            y: -50,
-            width: 2,
-            height: 2,
-            hp: 5,
-            maxHp: 5,
-            xp: 1,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: -70,
-            y: 50,
-            width: 2,
-            height: 2,
-            hp: 5,
-            maxHp: 5,
-            xp: 1,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: -10,
-            y: -70,
-            width: 2,
-            height: 2,
-            hp: 5,
-            maxHp: 5,
-            xp: 1,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
-        },
-        {
-            name: UnitName.Zombie,
-            x: -5,
-            y: -70,
-            width: 2,
-            height: 2,
-            hp: 5,
-            maxHp: 5,
-            xp: 1,
-            intersection: true,
-            rotation: 45,
-            lastShootTime: 0,
         },
     ],
     speed: 1,
