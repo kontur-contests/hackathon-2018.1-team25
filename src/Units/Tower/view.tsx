@@ -7,11 +7,21 @@ import * as c from './index.pcss';
 
 export class Tower extends UnitClass<UnitName.Tower> {
     public render() {
-        return (
-            <div className={c.Tower}>
-                <TowerConnected/>
-            </div>
-        );
+        const {
+            weaponRotation,
+            weaponName,
+        } = this.props;
+
+        return <div className={ c.Tower }>
+            <div
+                className={ c.Tower__weapon }
+                style={ {
+                    transform: `rotate(${weaponRotation}deg)`,
+                    backgroundImage: `url(./images/weapons/${weaponName}.png)`,
+                } }
+            />
+            <TowerConnected/>
+        </div>;
     }
 }
 

@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import { setShotPositoin, setStore, toggleMenu } from './actions';
+import { setHoverPositoin, setShotPositoin, setStore, toggleMenu, } from './actions';
 import { MyasoStore } from './MyasoStore';
 
 export const createConstructorReducer = (appState: MyasoStore) => createReducer<MyasoStore>({}, appState)
@@ -10,6 +10,12 @@ export const createConstructorReducer = (appState: MyasoStore) => createReducer<
         return {
             ...state,
             shotPosition,
+        };
+    })
+    .on(setHoverPositoin, (state, hoverPosition): MyasoStore => {
+        return {
+            ...state,
+            hoverPosition,
         };
     })
     .on(toggleMenu, (state, show): MyasoStore => {
