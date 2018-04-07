@@ -5,8 +5,19 @@ import * as c from './index.pcss';
 
 export class Tower extends UnitClass<UnitName.Tower> {
     public render() {
+        const {
+            weaponRotation,
+            weaponName,
+        } = this.props;
+
         return <div className={ c.Tower }>
-            tower
+            <div
+                className={ c.Tower__weapon }
+                style={ {
+                    transform: `rotate(${weaponRotation}deg)`,
+                    backgroundImage: `url(./images/weapons/${weaponName}.png)`,
+                } }
+            />
         </div>;
     }
 }

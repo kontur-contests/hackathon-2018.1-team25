@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PointCoordinates, Size } from '../../Store/MyasoStore';
-import { DragListener, DragPosition } from '../../Store/utils/DragListener';
+import { DragListener } from '../../Store/utils/DragListener';
+import { addElementEventListener } from '../../utils/addElementEventListener';
 import { ResizeSensor } from '../../utils/ResizeSensor';
 import HUD from '../HUD/view'
 import { Menu } from "../MenuUpdateWeapon/menu";
@@ -13,6 +14,7 @@ type AppState = {
 
 export type AppDispatchProps = {
     setShotPosition: (shotPosition: PointCoordinates | undefined) => void;
+    setHoverPosition: (hoverPosition: PointCoordinates) => void;
 }
 
 export class App extends React.Component<AppDispatchProps, AppState> {
@@ -122,7 +124,7 @@ export class App extends React.Component<AppDispatchProps, AppState> {
             size,
         });
 
-        const {setShotPosition} = this.props;
+        const { setShotPosition } = this.props;
 
         new DragListener(this.container!, {
             onStart: (dragPosition) => {
@@ -135,12 +137,21 @@ export class App extends React.Component<AppDispatchProps, AppState> {
                 setShotPosition(undefined);
             },
         });
+
+        addElementEventListener(this.container!, 'mousemove', (e: MouseEvent) => {
+            const point = this.getGamePosition({
+                x: e.clientX,
+                y: e.clientY,
+            });
+
+            this.props.setHoverPosition(point);
+        })
     }
 
     private getGamePosition({
                                 x,
                                 y,
-                            }: DragPosition): PointCoordinates {
+                            }: PointCoordinates): PointCoordinates {
         const {
             width,
             height,

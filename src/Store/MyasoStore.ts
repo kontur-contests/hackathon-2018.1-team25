@@ -43,7 +43,10 @@ export type WeaponBullet = {
 
 export type UnitData = {
     Zombie: Character;
-    Tower: Character;
+    Tower: Character & {
+        weaponRotation: number;
+        weaponName: WeaponBulletName;
+    };
     Piston: WeaponBullet;
 };
 
@@ -55,17 +58,19 @@ export type Unit<T extends UnitName> =
     & {
     name: T;
     intersection: boolean;
+    money: number;
 };
 
 export type MyasoStore = {
     units: Unit<UnitName>[];
     speed: number;
     shotPosition: PointCoordinates | undefined;
+    hoverPosition: PointCoordinates,
     player: Player;
     weapon: WeaponBulletName;
 };
 
-export const TOWER_SIZE = 9;
+export const TOWER_SIZE = 11;
 
 export type WeaponBulletName = UnitName.Piston;
 
@@ -87,8 +92,8 @@ export const UnitSize: {
         height: 1,
     },
     [UnitName.Tower]: {
-        width: 9,
-        height: 9,
+        width: TOWER_SIZE,
+        height: TOWER_SIZE,
     },
 };
 
@@ -115,6 +120,14 @@ export const CharacterParams: {
     },
 };
 
+export const UnitMoney: {
+    [key in UnitName]: number;
+} = {
+    [UnitName.Zombie]: 10,
+    [UnitName.Piston]: 0,
+    [UnitName.Tower]: 0,
+};
+
 export const defaultConstructorState: MyasoStore = {
     units: [
         {
@@ -128,10 +141,17 @@ export const defaultConstructorState: MyasoStore = {
             rotation: 0,
             lastShootTime: 0,
             xp: 0,
+            weaponRotation: 0,
+            money: 0,
+            weaponName: UnitName.Piston,
         },
     ],
     speed: 1,
     shotPosition: undefined,
+    hoverPosition: {
+        x: 0,
+        y: 0,
+    },
     player: {
         level: 1,
         xp: 0,

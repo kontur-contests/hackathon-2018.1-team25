@@ -12,6 +12,7 @@ import {
     defaultConstructorState,
     MyasoStore,
     Unit,
+    UnitMoney,
     UnitName,
     UnitSize,
     WeaponIntervals
@@ -69,6 +70,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
                     lastState.player.level = level;
                     lastState.player.xp = xp;
+                    lastState.player.money += unit.money;
 
                     return false;
                 }
@@ -88,9 +90,11 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
             if (bulletsCount > 0) {
                 lastShotTime = lastShotTime + weaponInterval * bulletsCount;
 
+                const angle = getAngleRelativeToOrigin(shotPosition);
+                const point = getPointRelativeToOriginByAngleAndDistance(4, angle);
+
                 const weaponBullet: Unit<UnitName> = {
-                    x: -0.5,
-                    y: -0.5,
+                    ...point,
                     width: 1,
                     height: 1,
                     destination: shotPosition,
@@ -98,6 +102,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     name: nextState.weapon,
                     intersection: true,
                     death: false,
+                    money: 0,
                 };
 
                 nextState.units.push(weaponBullet);
@@ -130,9 +135,10 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                 ...point,
                 ...UnitSize[monsterName],
                 ...CharacterParams[monsterName],
-                intersection: false,
+                intersection: true,
                 rotation: 0,
                 lastShootTime: now,
+                money: UnitMoney[monsterName],
             };
         }
 
