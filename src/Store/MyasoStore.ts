@@ -68,6 +68,7 @@ export type MyasoStore = {
     hoverPosition: PointCoordinates,
     player: Player;
     weapon: WeaponBulletName;
+    showShopMenu: boolean;
 };
 
 export const TOWER_SIZE = 11;
@@ -158,4 +159,5 @@ export const defaultConstructorState: MyasoStore = {
         money: 100,
     },
     weapon: UnitName.Piston,
+    showShopMenu: false,
 };

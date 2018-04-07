@@ -4,7 +4,7 @@ import { DragListener } from '../../Store/utils/DragListener';
 import { addElementEventListener } from '../../utils/addElementEventListener';
 import { ResizeSensor } from '../../utils/ResizeSensor';
 import HUD from '../HUD/view'
-import { Menu } from "../MenuUpdateWeapon/menu";
+import {MenuConnected} from "../MenuUpdateWeapon/menu";
 import { UnitsConnected } from '../Units/connected';
 import * as c from './style.pcss';
 
@@ -80,7 +80,7 @@ export class App extends React.Component<AppDispatchProps, AppState> {
 
                 </div>
                 <UnitsConnected/>
-                <Menu/>
+                <MenuConnected/>
             </div>
         </div>;
     }
