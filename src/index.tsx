@@ -22,9 +22,13 @@ import { UnitController } from './Units/UnitController';
 import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from './utils/getPointRelativeToOriginByAngleAndDistance';
 import { addXp } from './utils/playerInteractions';
-//import {runAudio} from "./utils/runAudio";
-
+//import {runAudio} from './utils/runAudio';
 //runAudio();
+
+const {addBlood} = require('./utils/addBlood') ;
+
+
+
 
 function createAnimaionConstoller(store: Store<MyasoStore>) {
     let lastTime = Date.now();
@@ -74,9 +78,10 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     lastState.player.level = level;
                     lastState.player.xp = xp;
                     lastState.player.money += unit.money;
-
+                    addBlood({x: unit.x, y: unit.y});
                     return false;
                 }
+
 
                 return unit.death !== true;
             }),
