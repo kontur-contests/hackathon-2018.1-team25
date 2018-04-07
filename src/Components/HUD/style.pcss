@@ -3,7 +3,6 @@
     top: 10px;
     left: 0;
     width: 100%;
-    opacity: 0.5;
     z-index: 1000;
 
     &__xp {
@@ -12,13 +11,19 @@
         top: 0;
         left: 0;
 
-      &__level {
+      &__label {
           display: inline-block;
           padding-right: 10px;
       }
 
       &__progress {
           display: inline-block;
+          width: 340px;
+
+          &__bar {
+              display: inline-block;
+              width: 300px;
+          }
       }
     }
 
