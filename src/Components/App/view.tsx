@@ -4,6 +4,7 @@ import { ResizeSensor } from '../../utils/ResizeSensor/index';
 import { UnitsConnected } from '../Units/connected';
 import HUD from '../HUD/view'
 import * as c from './style.pcss';
+import {Menu} from "../MenuUpdateWeapon/menu";
 
 type AppState = {
     size: Size;
@@ -72,6 +73,7 @@ export class App extends React.Component<{}, AppState> {
 
                 </div>
                 <UnitsConnected/>
+                <Menu/>
             </div>
         </div>;
     }
