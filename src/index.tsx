@@ -55,12 +55,12 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                 lastShotTime = lastShotTime + weaponInterval * bulletsCount;
 
                 const weaponBullet: Unit<UnitName> = {
-                    x: -0.25,
-                    y: -0.25,
-                    width: 0.5,
-                    height: 0.5,
+                    x: -0.5,
+                    y: -0.5,
+                    width: 1,
+                    height: 1,
                     destination: shotPosition,
-                    rotation: getAngleRelativeToOrigin(shotPosition) + 180,
+                    rotation: getAngleRelativeToOrigin(shotPosition),
                     name: nextState.weapon,
                     intersection: false,
                 };

@@ -6,7 +6,7 @@ import * as c from './index.pcss';
 export class Piston extends UnitClass<UnitName.Piston> {
     public render() {
         return <div className={ c.Piston }>
-            tower
+            <img  src="./images/piston.png"/>
         </div>;
     }
 }
