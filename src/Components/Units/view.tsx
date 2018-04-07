@@ -30,19 +30,48 @@ export class Units extends React.Component<UnitsProps, {}> {
         } = this.props;
 
         return <div>
-            {
-                units.map((unit, i) => {
-                    const UClass: Unit<any> = UnitClasses[unit.name];
+            <React.Fragment>
+                {
+                    units.map((unit, i) => {
+                        const UClass: Unit<any> = UnitClasses[unit.name];
 
-                    return <div
-                        key={ i }
-                        className={ c.Units__unit }
-                        style={ unitToStyle(unit) }
-                    >
-                        <UClass { ...unit }/>
-                    </div>;
-                })
-            }
+                        return <div
+                            key={ i }
+                            className={ c.Units__unit }
+                            style={ unitToStyle(unit) }
+                        >
+                            <UClass { ...unit }/>
+                        </div>;
+
+                    })
+                }
+                {
+                    units.map((unit, i) => {
+                        const {
+                            hp,
+                            maxHp,
+                        } = unit;
+
+                        return typeof hp === 'number'
+                            ? <div
+                                key={ i }
+                                className={ c.Units__hp }
+                                style={ unitToStyle({
+                                    ...unit,
+                                    width: 0,
+                                    height: 0,
+                                    x: unit.x + unit.height / 2,
+                                    rotation: 0,
+                                }) }
+                            >
+                                <div className={ c.Units__hp__text }>
+                                    { `${hp}/${maxHp}` }
+                                </div>
+                            </div>
+                            : null
+                    })
+                }
+            </React.Fragment>
         </div>;
     }
 }
