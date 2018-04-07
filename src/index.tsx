@@ -8,6 +8,7 @@ import { setStore } from './Store/actions';
 import { createMyasoStore } from './Store/createMyasoStore';
 import { defaultConstructorState, MyasoStore } from './Store/MyasoStore';
 import { UnitControllers } from './UnitControllers';
+import { UnitController } from './Units/UnitController';
 
 function createAnimaionConstoller(store: Store<MyasoStore>) {
     let lastTime = Date.now();
@@ -20,13 +21,18 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
         const state = store.getState();
 
-        const { units } = state;
+        const {
+            units,
+            speed,
+        } = state;
 
         let lastState = state;
         for (let key = 0; key < units.length; key++) {
             const unit = units[key];
 
-            lastState = UnitControllers[unit.name](key, diff, unit, lastState);
+            const controller: UnitController<any> = UnitControllers[unit.name];
+
+            lastState = controller(key, diff * speed, unit, lastState);
         }
 
         store.dispatch(setStore(clone(lastState)));

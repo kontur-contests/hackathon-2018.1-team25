@@ -1,6 +1,11 @@
 export enum UnitName {
     Zombie = 'Zombie',
+    Tower = 'Tower',
 }
+
+export type Rotaion = {
+    rotation: number;
+};
 
 export type PointCoordinates = {
     x: number;
@@ -15,13 +20,20 @@ export type Size = {
 export type Character = {
     // 0 - 100
     hp: number;
+    intersection: boolean;
 };
 
 export type UnitData = {
     Zombie: Character;
+    Tower: Character;
 };
 
-export type Unit<T extends UnitName> = UnitData[T] & PointCoordinates & Size & {
+export type Unit<T extends UnitName> =
+    & UnitData[T]
+    & Rotaion
+    & PointCoordinates
+    & Size
+    & {
     name: T;
 };
 
@@ -30,8 +42,20 @@ export type MyasoStore = {
     speed: number;
 };
 
+export const TOWER_SIZE = 9;
+
 export const defaultConstructorState: MyasoStore = {
     units: [
+        {
+            name: UnitName.Tower,
+            x: -TOWER_SIZE / 2,
+            y: -TOWER_SIZE / 2,
+            width: TOWER_SIZE,
+            height: TOWER_SIZE,
+            hp: 100,
+            intersection: false,
+            rotation: 0,
+        },
         {
             name: UnitName.Zombie,
             x: -50,
@@ -39,6 +63,8 @@ export const defaultConstructorState: MyasoStore = {
             width: 2,
             height: 2,
             hp: 100,
+            intersection: true,
+            rotation: 45,
         },
     ],
     speed: 1,
