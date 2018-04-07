@@ -26,6 +26,6 @@ export function addXp(playerXpInfo: PlayerXpInfo, addingXp: number): PlayerXpInf
             return {
                 level: level - 1,
                 xp: tmp + leftXp,
-            }
+            };
     }
 }
