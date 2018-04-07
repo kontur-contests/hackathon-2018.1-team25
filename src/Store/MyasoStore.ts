@@ -107,5 +107,5 @@ export const defaultConstructorState: MyasoStore = {
             rotation: 45,
         },
     ],
-    speed: 1,
+    speed: 3,
 };
