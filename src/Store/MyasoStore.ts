@@ -42,6 +42,11 @@ export type WeaponBullet = {
     death: boolean;
 }
 
+export type HealData = {
+    cost: number;
+    hpToHeal: number;
+}
+
 export type UnitData = {
     Zombie: Character;
     Tower: Character & {
