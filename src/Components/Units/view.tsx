@@ -50,7 +50,7 @@ export class Units extends React.Component<UnitsProps, {}> {
                         const {
                             hp,
                             maxHp,
-                        } = unit;
+                        } = unit as any;
 
                         return typeof hp === 'number'
                             ? <div

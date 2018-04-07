@@ -88,8 +88,6 @@ export class App extends React.Component<AppDispatchProps, AppState> {
             this.setState({ size });
         });
 
-        console.log(this.props.setShotPosition);
-
         const size = this.resizeSensor.getSize();
 
         (window as any).canvas.width = 3000;
@@ -124,15 +122,17 @@ export class App extends React.Component<AppDispatchProps, AppState> {
             size,
         });
 
+        const {setShotPosition} = this.props;
+
         new DragListener(this.container!, {
             onStart: (dragPosition) => {
-                console.log('start', this.getGamePosition(dragPosition));
+                setShotPosition(this.getGamePosition(dragPosition));
             },
             onMove: (dragPosition) => {
-                console.log('move', this.getGamePosition(dragPosition));
+                setShotPosition(this.getGamePosition(dragPosition));
             },
-            onEnd: (dragPosition) => {
-                console.log('end', this.getGamePosition(dragPosition));
+            onEnd: () => {
+                setShotPosition(undefined);
             },
         });
     }

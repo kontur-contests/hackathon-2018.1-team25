@@ -7,6 +7,7 @@ export type Player = {
 export enum UnitName {
     Zombie = 'Zombie',
     Tower = 'Tower',
+    Piston = 'Piston',
 }
 
 export type Rotaion = {
@@ -27,7 +28,6 @@ export type Character = {
     // 0 - 100
     hp: number;
     maxHp: number;
-    intersection: boolean;
     lastShootTime: number;
 };
 
@@ -35,9 +35,15 @@ export type ShootCharacter = {
     lastShootTime: number;
 };
 
+export type Bullet = {
+    destination: PointCoordinates;
+    startPosition: PointCoordinates;
+}
+
 export type UnitData = {
     Zombie: Character;
     Tower: Character;
+    Piston: Bullet;
 };
 
 export type Unit<T extends UnitName> =
@@ -47,11 +53,13 @@ export type Unit<T extends UnitName> =
     & Size
     & {
     name: T;
+    intersection: boolean;
 };
 
 export type MyasoStore = {
     units: Unit<UnitName>[];
     speed: number;
+    shotPosition: PointCoordinates | undefined;
     player: Player;
 };
 
@@ -156,7 +164,8 @@ export const defaultConstructorState: MyasoStore = {
             lastShootTime: 0,
         },
     ],
-    speed: 3,
+    speed: 1,
+    shotPosition: undefined,
     player: {
         level: 1,
         xp: 0,
