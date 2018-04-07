@@ -1,16 +1,21 @@
 import * as React from 'react';
-import { Size } from '../../Store/MyasoStore';
-import { ResizeSensor } from '../../utils/ResizeSensor/index';
-import { UnitsConnected } from '../Units/connected';
+import { PointCoordinates, Size } from '../../Store/MyasoStore';
+import { DragListener, DragPosition } from '../../Store/utils/DragListener';
+import { ResizeSensor } from '../../utils/ResizeSensor';
 import HUD from '../HUD/view'
+import { Menu } from "../MenuUpdateWeapon/menu";
+import { UnitsConnected } from '../Units/connected';
 import * as c from './style.pcss';
-import {Menu} from "../MenuUpdateWeapon/menu";
 
 type AppState = {
     size: Size;
 }
 
-export class App extends React.Component<{}, AppState> {
+export type AppDispatchProps = {
+    setShotPosition: (shotPosition: PointCoordinates | undefined) => void;
+}
+
+export class App extends React.Component<AppDispatchProps, AppState> {
     public state = {
         size: {
             width: 0,
@@ -38,36 +43,36 @@ export class App extends React.Component<{}, AppState> {
             : (height - squareSize) / 2;
 
         return <div
-            className={c.App}
-            ref={(element) => {
+            className={ c.App }
+            ref={ (element) => {
                 this.container = element!;
-            }}
+            } }
         >
             <HUD/>
             <div
-                className={c.App__square}
-                style={{
+                className={ c.App__square }
+                style={ {
                     width: `${squareSize}px`,
                     height: `${squareSize}px`,
                     left: `${left}px`,
                     top: `${top}px`,
-                }}
+                } }
             >
                 <div
-                    className={c.App__background}
-                    ref={(element) => {
+                    className={ c.App__background }
+                    ref={ (element) => {
                         this.container = element!;
-                    }}
+                    } }
                 >
                     <canvas
 
-                        ref={(element) => {
+                        ref={ (element) => {
                             (window as any).canvas = element!;
-                        }}
-                        style={{
+                        } }
+                        style={ {
                             width: '100%',
                             height: '100%'
-                        }}
+                        } }
                     />
 
 
@@ -80,7 +85,7 @@ export class App extends React.Component<{}, AppState> {
 
     public componentDidMount() {
         this.resizeSensor = new ResizeSensor(this.container!, (size) => {
-            this.setState({size});
+            this.setState({ size });
         });
 
         const size = this.resizeSensor.getSize();
@@ -90,10 +95,10 @@ export class App extends React.Component<{}, AppState> {
 
         let ctx = (window as any).canvas.getContext('2d');
 
-        function loadImage(src: string):Promise<HTMLImageElement> {
+        function loadImage(src: string): Promise<HTMLImageElement> {
             return new Promise((resolve) => {
                 const img = document.createElement('img');
-                img.onload = ()=>{
+                img.onload = () => {
                     resolve(img)
                 };
                 img.src = src;
@@ -103,7 +108,7 @@ export class App extends React.Component<{}, AppState> {
         Promise.all([
             loadImage('images/background.jpg'),
             loadImage('images/stone.png')
-        ]).then(([img1, img2])=>{
+        ]).then(([img1, img2]) => {
             for (let row = 0; row < ctx.canvas.height; row += img1.height) {
                 for (let col = 0; col < ctx.canvas.width; col += img1.width) {
                     ctx.drawImage(img1, col, row);
@@ -116,6 +121,48 @@ export class App extends React.Component<{}, AppState> {
         this.setState({
             size,
         });
+
+        const {setShotPosition} = this.props;
+
+        new DragListener(this.container!, {
+            onStart: (dragPosition) => {
+                setShotPosition(this.getGamePosition(dragPosition));
+            },
+            onMove: (dragPosition) => {
+                setShotPosition(this.getGamePosition(dragPosition));
+            },
+            onEnd: () => {
+                setShotPosition(undefined);
+            },
+        });
+    }
+
+    private getGamePosition({
+                                x,
+                                y,
+                            }: DragPosition): PointCoordinates {
+        const {
+            width,
+            height,
+        } = this.state.size;
+
+        const squareSize = Math.min(width, height);
+        const left = width > height
+            ? (width - squareSize) / 2
+            : 0;
+        const top = width > height
+            ? 0
+            : (height - squareSize) / 2;
+
+        const center = {
+            x: left + squareSize / 2,
+            y: top + squareSize / 2,
+        };
+
+        return {
+            x: -(center.x - x) / squareSize * 100,
+            y: -(center.y - y) / squareSize * 100,
+        };
     }
 }
 
