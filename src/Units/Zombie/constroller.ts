@@ -4,7 +4,7 @@ import { getPointRelativeToOriginByAngleAndDistance } from '../../utils/getPoint
 import { UnitController } from '../UnitController';
 
 export const zombieConrtoller: UnitController<UnitName.Zombie> = (index, diff, unit, store) => {
-    const rotation = getAngleRelativeToOrigin(unit);
+    const rotation = getAngleRelativeToOrigin(unit) + 180;
     const nextPosition = getPointRelativeToOriginByAngleAndDistance(diff / 200, rotation);
 
     unit.rotation = rotation;
