@@ -6,6 +6,7 @@ import { Store } from 'redux';
 import { App } from './Components/App/view';
 import { setStore } from './Store/actions';
 import { createMyasoStore } from './Store/createMyasoStore';
+import { getTower } from './Store/getters/getTower';
 import { defaultConstructorState, MyasoStore } from './Store/MyasoStore';
 import { UnitControllers } from './UnitControllers';
 import { UnitController } from './Units/UnitController';
@@ -37,9 +38,16 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
         // check if monters are death
 
-        store.dispatch(setStore(clone(lastState)));
+        const nextState = clone(lastState);
 
-        requestAnimationFrame(tick);
+        const tower = getTower(nextState);
+        store.dispatch(setStore(nextState));
+
+        if (tower.hp === 0) {
+            alert('game over!!!');
+        } else {
+            requestAnimationFrame(tick);
+        }
     };
 
     tick();
