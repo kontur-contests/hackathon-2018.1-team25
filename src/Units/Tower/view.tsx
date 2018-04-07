@@ -12,6 +12,8 @@ export class Tower extends UnitClass<UnitName.Tower> {
             weaponName,
         } = this.props;
 
+        console.log(weaponName);
+
         return <div className={ c.Tower }>
             <div
                 className={ c.Tower__weapon }

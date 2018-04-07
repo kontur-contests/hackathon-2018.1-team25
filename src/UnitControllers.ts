@@ -1,4 +1,5 @@
 import { UnitName } from './Store/MyasoStore';
+import { bazookaConrtoller } from './Units/Bazooka/constroller';
 import { pistonConrtoller } from './Units/Piston/constroller';
 import { towerConrtoller } from './Units/Tower/constroller';
 import { UnitController } from './Units/UnitController';
@@ -10,4 +11,5 @@ export const UnitControllers: {
     [UnitName.Zombie]: zombieConrtoller,
     [UnitName.Tower]: towerConrtoller,
     [UnitName.Piston]: pistonConrtoller,
+    [UnitName.Bazooka]: bazookaConrtoller,
 };
