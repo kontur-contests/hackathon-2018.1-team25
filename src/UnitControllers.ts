@@ -1,5 +1,6 @@
 import { UnitName } from './Store/MyasoStore';
 import { bazookaConrtoller } from './Units/Bazooka/constroller';
+import { machinegunConrtoller } from './Units/Machinegun/constroller';
 import { pistonConrtoller } from './Units/Piston/constroller';
 import { pooConrtoller } from './Units/Poo/constroller';
 import { towerConrtoller } from './Units/Tower/constroller';
@@ -14,4 +15,5 @@ export const UnitControllers: {
     [UnitName.Tower]: towerConrtoller,
     [UnitName.Piston]: pistonConrtoller,
     [UnitName.Bazooka]: bazookaConrtoller,
+    [UnitName.Machinegun]: machinegunConrtoller,
 };

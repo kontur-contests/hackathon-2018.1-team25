@@ -10,6 +10,7 @@ export enum UnitName {
     Tower = 'Tower',
     Piston = 'Piston',
     Bazooka = 'Bazooka',
+    Machinegun = 'Machinegun',
 }
 
 export type Rotaion = {
@@ -57,6 +58,7 @@ export type UnitData = {
     };
     Piston: WeaponBullet;
     Bazooka: WeaponBullet;
+    Machinegun: WeaponBullet;
 };
 
 export type Unit<T extends UnitName> =
@@ -82,13 +84,14 @@ export type MyasoStore = {
 
 export const TOWER_SIZE = 11;
 
-export type WeaponBulletName = UnitName.Piston | UnitName.Bazooka;
+export type WeaponBulletName = UnitName.Piston | UnitName.Bazooka | UnitName.Machinegun;
 
 export const WeaponIntervals: {
     [key in WeaponBulletName]: number;
 } = {
     [UnitName.Piston]: 500,
     [UnitName.Bazooka]: 500,
+    [UnitName.Machinegun]: 100,
 };
 
 export const UnitSize: {
@@ -107,6 +110,10 @@ export const UnitSize: {
         height: 1,
     },
     [UnitName.Bazooka]: {
+        width: 1,
+        height: 1,
+    },
+    [UnitName.Machinegun]: {
         width: 1,
         height: 1,
     },
@@ -137,6 +144,12 @@ export const CharacterParams: {
         xp: 0,
         lastShootTime: 0,
     },
+    [UnitName.Machinegun]: {
+        hp: 0,
+        maxHp: 0,
+        xp: 0,
+        lastShootTime: 0,
+    },
     [UnitName.Bazooka]: {
         hp: 0,
         maxHp: 0,
@@ -157,6 +170,7 @@ export const UnitMoney: {
     [UnitName.Zombie]: 10,
     [UnitName.Poo]: 25,
     [UnitName.Piston]: 0,
+    [UnitName.Machinegun]: 0,
     [UnitName.Bazooka]: 0,
     [UnitName.Tower]: 0,
 };
@@ -176,7 +190,7 @@ export const defaultConstructorState: MyasoStore = {
             xp: 0,
             weaponRotation: 0,
             money: 0,
-            weaponName: UnitName.Bazooka,
+            weaponName: UnitName.Machinegun,
         },
     ],
     speed: 1,
@@ -190,6 +204,6 @@ export const defaultConstructorState: MyasoStore = {
         xp: 0,
         money: 100,
     },
-    weapon: UnitName.Bazooka,
+    weapon: UnitName.Machinegun,
     showShopMenu: false,
 };
