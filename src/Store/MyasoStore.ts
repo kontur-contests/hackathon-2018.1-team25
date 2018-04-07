@@ -20,7 +20,13 @@ export type Size = {
 export type Character = {
     // 0 - 100
     hp: number;
+    maxHp: number;
     intersection: boolean;
+    lastShootTime: number;
+};
+
+export type ShootCharacter = {
+    lastShootTime: number;
 };
 
 export type UnitData = {
@@ -53,8 +59,10 @@ export const defaultConstructorState: MyasoStore = {
             width: TOWER_SIZE,
             height: TOWER_SIZE,
             hp: 100,
+            maxHp: 100,
             intersection: false,
             rotation: 0,
+            lastShootTime: 0,
         },
         {
             name: UnitName.Zombie,
@@ -63,8 +71,10 @@ export const defaultConstructorState: MyasoStore = {
             width: 2,
             height: 2,
             hp: 100,
+            maxHp: 100,
             intersection: true,
             rotation: 45,
+            lastShootTime: 0,
         },
         {
             name: UnitName.Zombie,
@@ -73,8 +83,10 @@ export const defaultConstructorState: MyasoStore = {
             width: 2,
             height: 2,
             hp: 100,
+            maxHp: 100,
             intersection: true,
             rotation: 45,
+            lastShootTime: 0,
         },
         {
             name: UnitName.Zombie,
@@ -83,8 +95,10 @@ export const defaultConstructorState: MyasoStore = {
             width: 2,
             height: 2,
             hp: 100,
+            maxHp: 100,
             intersection: true,
             rotation: 45,
+            lastShootTime: 0,
         },
         {
             name: UnitName.Zombie,
@@ -93,8 +107,10 @@ export const defaultConstructorState: MyasoStore = {
             width: 2,
             height: 2,
             hp: 100,
+            maxHp: 100,
             intersection: true,
             rotation: 45,
+            lastShootTime: 0,
         },
         {
             name: UnitName.Zombie,
@@ -103,8 +119,34 @@ export const defaultConstructorState: MyasoStore = {
             width: 2,
             height: 2,
             hp: 100,
+            maxHp: 100,
             intersection: true,
             rotation: 45,
+            lastShootTime: 0,
+        },
+        {
+            name: UnitName.Zombie,
+            x: -10,
+            y: -70,
+            width: 2,
+            height: 2,
+            hp: 100,
+            maxHp: 100,
+            intersection: true,
+            rotation: 45,
+            lastShootTime: 0,
+        },
+        {
+            name: UnitName.Zombie,
+            x: -5,
+            y: -70,
+            width: 2,
+            height: 2,
+            hp: 100,
+            maxHp: 100,
+            intersection: true,
+            rotation: 45,
+            lastShootTime: 0,
         },
     ],
     speed: 3,
