@@ -25,7 +25,7 @@ class Menu extends React.Component<MenuProps> {
         const menuShownClass = this.props.showShopMenu ? c.Menu__field__opened : c.Menu__field__closed;
         return (
             <div className={cx('pointer', c.Menu__field, menuShownClass)}>
-                <MenuItemConnected imageUrl="red" enabled={player => player.money >= 150} action={() => {
+                <MenuItemConnected imageUrl="./images/first-aid-kit.png" enabled={player => player.money >= 150} action={() => {
                     console.log('buy medkit');
                     this.props.heal({
                         cost: 150,
