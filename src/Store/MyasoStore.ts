@@ -35,15 +35,14 @@ export type ShootCharacter = {
     lastShootTime: number;
 };
 
-export type Bullet = {
+export type WeaponBullet = {
     destination: PointCoordinates;
-    startPosition: PointCoordinates;
 }
 
 export type UnitData = {
     Zombie: Character;
     Tower: Character;
-    Piston: Bullet;
+    Piston: WeaponBullet;
 };
 
 export type Unit<T extends UnitName> =
@@ -61,9 +60,18 @@ export type MyasoStore = {
     speed: number;
     shotPosition: PointCoordinates | undefined;
     player: Player;
+    weapon: WeaponBulletName;
 };
 
 export const TOWER_SIZE = 9;
+
+export type WeaponBulletName = UnitName.Piston;
+
+export const WeaponIntervals: {
+    [key in WeaponBulletName]: number;
+} = {
+    [UnitName.Piston]: 2000,
+};
 
 export const defaultConstructorState: MyasoStore = {
     units: [
@@ -171,4 +179,5 @@ export const defaultConstructorState: MyasoStore = {
         xp: 0,
         money: 100,
     },
+    weapon: UnitName.Piston,
 };

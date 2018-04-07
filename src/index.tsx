@@ -7,12 +7,15 @@ import { AppConnected } from './Components/App/connected';
 import { setStore } from './Store/actions';
 import { createMyasoStore } from './Store/createMyasoStore';
 import { getTower } from './Store/getters/getTower';
-import { defaultConstructorState, MyasoStore } from './Store/MyasoStore';
+import { defaultConstructorState, MyasoStore, Unit, UnitName, WeaponIntervals } from './Store/MyasoStore';
 import { UnitControllers } from './UnitControllers';
 import { UnitController } from './Units/UnitController';
+import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
 
 function createAnimaionConstoller(store: Store<MyasoStore>) {
     let lastTime = Date.now();
+
+    let lastShotTime = lastTime;
 
     const tick: () => void = () => {
         const now = Date.now();
@@ -39,6 +42,32 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
         // check if monters are death
 
         const nextState = clone(lastState);
+
+        const { shotPosition } = nextState;
+        if (shotPosition) {
+            const shotDiff = now - lastShotTime;
+            const weaponInterval = WeaponIntervals[nextState.weapon];
+            const bulletsCount = Math.floor(shotDiff / weaponInterval);
+
+            console.log(bulletsCount);
+
+            if (bulletsCount > 0) {
+                lastShotTime = lastShotTime + weaponInterval * bulletsCount;
+
+                const weaponBullet: Unit<UnitName> = {
+                    x: -0.25,
+                    y: -0.25,
+                    width: 0.5,
+                    height: 0.5,
+                    destination: shotPosition,
+                    rotation: getAngleRelativeToOrigin(shotPosition) + 180,
+                    name: nextState.weapon,
+                    intersection: false,
+                };
+
+                nextState.units.push(weaponBullet);
+            }
+        }
 
         const tower = getTower(nextState);
         store.dispatch(setStore(nextState));

@@ -41,9 +41,7 @@ export const zombieConrtoller: UnitController<UnitName.Zombie> = (index, diff, u
         if (now - unit.lastShootTime > SHOOT_INTERVAL) {
             unit.lastShootTime = now;
 
-            const damage = shootUnits(intersected, DAMAGE);
-            console.log(damage);
-            // TODO: push damage to state
+            shootUnits(intersected, DAMAGE);
         }
     }
 
