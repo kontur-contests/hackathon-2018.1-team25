@@ -6,7 +6,7 @@ export function getPointRelativeToOriginByAngleAndDistance(distance: number,
     const radians = degreesToRadians(angle);
 
     return {
-        x: -distance * Math.cos(radians),
-        y: -distance * Math.sin(radians),
+        x: distance * Math.cos(radians),
+        y: distance * Math.sin(radians),
     };
 }
