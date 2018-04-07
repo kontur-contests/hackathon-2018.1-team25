@@ -57,6 +57,7 @@ export type WeaponRevealData = {
 export type WeaponsData = {
     [UnitName.Piston]: boolean;
     [UnitName.Bazooka]: boolean;
+    [UnitName.Machinegun]: boolean;
 }
 
 export type UnitData = {
@@ -218,6 +219,7 @@ export const defaultConstructorState: MyasoStore = {
     weapons: {
         [UnitName.Piston]: true,
         [UnitName.Bazooka]: false,
+        [UnitName.Machinegun]: false,
     },
     weapon: UnitName.Piston,
     showShopMenu: false,
