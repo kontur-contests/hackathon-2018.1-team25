@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Size } from '../../Store/MyasoStore';
 import { ResizeSensor } from '../../utils/ResizeSensor/index';
 import { UnitsConnected } from '../Units/connected';
+import HUD from '../HUD/view'
 import * as c from './style.pcss';
 
 type AppState = {
@@ -14,7 +15,7 @@ export class App extends React.Component<{}, AppState> {
             width: 0,
             height: 0,
         }
-    }
+    };
 
     private resizeSensor?: ResizeSensor;
     private container?: HTMLElement;
@@ -41,6 +42,7 @@ export class App extends React.Component<{}, AppState> {
                 this.container = element!;
             } }
         >
+            <HUD/>
             <div
                 className={ c.App__square }
                 style={{

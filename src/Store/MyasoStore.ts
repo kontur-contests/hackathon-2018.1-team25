@@ -1,3 +1,9 @@
+export type Player = {
+    xp: number,
+    level: number,
+    money: number,
+}
+
 export enum UnitName {
     Zombie = 'Zombie',
     Tower = 'Tower',
@@ -40,6 +46,7 @@ export type Unit<T extends UnitName> =
 export type MyasoStore = {
     units: Unit<UnitName>[];
     speed: number;
+    player: Player;
 };
 
 export const TOWER_SIZE = 9;
@@ -108,4 +115,9 @@ export const defaultConstructorState: MyasoStore = {
         },
     ],
     speed: 3,
+    player: {
+        level: 1,
+        xp: 0,
+        money: 100,
+    },
 };

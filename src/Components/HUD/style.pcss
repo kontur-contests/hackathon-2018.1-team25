@@ -1,0 +1,33 @@
+.Hud {
+    position: absolute;
+    background-color: darkkhaki;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    opacity: 0.5;
+    z-index: 1000;
+
+    &__xp {
+        position: relative;
+        float: left;
+        top: 0;
+        left: 0;
+
+      &__level {
+          display: inline-block;
+          padding-right: 10px;
+      }
+
+      &__progress {
+          display: inline-block;
+      }
+    }
+
+    &__money {
+        position: relative;
+        text-align: right;
+        top: 0;
+        right: 0;
+    }
+}
