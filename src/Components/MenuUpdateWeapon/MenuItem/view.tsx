@@ -9,21 +9,25 @@ type MenuItemProps = MenuConnectedProps & {
 
 class MenuItem extends React.Component<MenuItemProps> {
     render() {
-        debugger;
         const enabled = this.props.enabled(this.props.player);
         return (
-          <div className={styles.MenuItem}>
+          <div className={styles.MenuItem} onClick={this.handleClick}>
               <div className={styles.MenuItem__element} style={{backgroundColor: this.props.imageUrl}}>
                   {!enabled && <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}/>}
               </div>
           </div>
         );
     }
+
+    handleClick = () => {
+        this.props.action();
+    }
 }
 
 type MenuConnectedProps = {
     imageUrl: string;
     enabled: (player: Player) => boolean;
+    action: () => void;
 }
 
 const mapStateToPropsFactory: MapStateToPropsFactory<MenuItemProps, MenuConnectedProps, MyasoStore> = (initialStore, initialOwnProps) => {
