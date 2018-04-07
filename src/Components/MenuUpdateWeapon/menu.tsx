@@ -35,7 +35,7 @@ class Menu extends React.Component<MenuProps> {
                 <MenuItemConnected imageUrl="./images/weapons/Bazooka.png" enabled={player => player.money >= 200} action={() => {
                     console.log('buy weapon');
                     this.props.revealWeapon({
-                        cost: 1000,
+                        cost: 200,
                         weaponName: UnitName.Bazooka
                     })
                 }}/>
