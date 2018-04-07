@@ -1,6 +1,6 @@
 import { default as ResizeObserver } from 'resize-observer-polyfill';
 import { Size } from '../../Store/MyasoStore';
-const { noop } = require('../noop');
+const { noop } = require('../noop/index');
 
 export class ResizeSensor {
     private readonly observer: ResizeObserver;

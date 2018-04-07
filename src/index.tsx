@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import { App } from './Components/App/view';
+import { AppConnected } from './Components/App/connected';
 import { setStore } from './Store/actions';
 import { createMyasoStore } from './Store/createMyasoStore';
 import { getTower } from './Store/getters/getTower';
@@ -58,7 +58,7 @@ function createMyaso(container: HTMLElement): void {
 
     ReactDOM.render(
         <Provider store={ store }>
-            <App/>
+            <AppConnected/>
         </Provider>,
         container,
     );
