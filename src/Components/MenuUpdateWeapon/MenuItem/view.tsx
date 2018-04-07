@@ -12,7 +12,7 @@ class MenuItem extends React.Component<MenuItemProps> {
         const enabled = this.props.enabled(this.props.player);
         return (
           <div className={styles.MenuItem} onClick={this.handleClick}>
-              <div className={styles.MenuItem__element} style={{backgroundColor: this.props.imageUrl}}>
+              <div className={styles.MenuItem__element} style={{backgroundImage: `url(${this.props.imageUrl})`}}>
                   {!enabled && <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}/>}
               </div>
           </div>

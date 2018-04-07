@@ -49,6 +49,16 @@ export type HealData = {
     hpToHeal: number;
 }
 
+export type WeaponRevealData = {
+    cost: number;
+    weaponName: WeaponBulletName;
+}
+
+export type WeaponsData = {
+    [UnitName.Piston]: boolean;
+    [UnitName.Bazooka]: boolean;
+}
+
 export type UnitData = {
     Zombie: Character;
     Poo: Character;
@@ -78,6 +88,7 @@ export type MyasoStore = {
     shotPosition: PointCoordinates | undefined;
     hoverPosition: PointCoordinates,
     player: Player;
+    weapons: WeaponsData;
     weapon: WeaponBulletName;
     showShopMenu: boolean;
 };
@@ -204,6 +215,10 @@ export const defaultConstructorState: MyasoStore = {
         xp: 0,
         money: 100,
     },
-    weapon: UnitName.Machinegun,
+    weapons: {
+        [UnitName.Piston]: true,
+        [UnitName.Bazooka]: false,
+    },
+    weapon: UnitName.Piston,
     showShopMenu: false,
 };

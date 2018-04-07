@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect, MapDispatchToPropsFunction, MapStateToPropsFactory} from 'react-redux';
-import {HealData, MyasoStore} from '../../Store/MyasoStore';
+import {HealData, MyasoStore, UnitName, WeaponRevealData} from '../../Store/MyasoStore';
 import {MenuItemConnected} from './MenuItem/view';
-import {heal} from '../../Store/actions';
+import {heal, revealWeapon} from '../../Store/actions';
 import * as c from './style.pcss';
 import * as cx from 'classnames';
 
@@ -13,6 +13,7 @@ type StateToProps = {
 
 type DispatchToProps = {
     heal: (healData: HealData) => void;
+    revealWeapon: (weaponRevealData: WeaponRevealData) => void;
 }
 
 type MenuProps =
@@ -31,7 +32,13 @@ class Menu extends React.Component<MenuProps> {
                         hpToHeal: 30,
                     });
                 }}/>
-                <MenuItemConnected imageUrl="green" enabled={player => player.money > 1000} action={() => console.log('buy weapon')}/>
+                <MenuItemConnected imageUrl="./images/weapons/Bazooka.png" enabled={player => player.money >= 200} action={() => {
+                    console.log('buy weapon');
+                    this.props.revealWeapon({
+                        cost: 1000,
+                        weaponName: UnitName.Bazooka
+                    })
+                }}/>
             </div>
         );
     }
@@ -48,7 +55,8 @@ const mapStateToPropsFactory: MapStateToPropsFactory<StateToProps, {}, MyasoStor
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchToProps, {}> =
     (dispatch, ownProps): DispatchToProps => {
         return {
-            heal: (healData: HealData): void => {dispatch(heal(healData))},
+            heal: healData => {dispatch(heal(healData))},
+            revealWeapon: weaponRevealData => {dispatch(revealWeapon(weaponRevealData))},
         };
     };
 
