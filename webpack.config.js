@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const dist = path.resolve(__dirname, './dist');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -8,9 +9,10 @@ module.exports = {
         costructor: './src',
     },
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: dist,
         filename: '[name].js',
         jsonpFunction: 'animationConstructorJSONP',
+        publicPath: '/dist/',
     },
     resolve: {
         extensions: [
@@ -98,7 +100,7 @@ module.exports = {
     plugins: [
           new HtmlWebPackPlugin({
                 template: "./index.html",
-                filename: "./index.html"
+                filename: path.resolve(dist, "./index.html")
           })
     ]
 };

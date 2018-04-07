@@ -1,11 +1,12 @@
+import * as clone from 'clone';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import * as clone from 'clone';
 import { App } from './Components/App/view';
 import { setStore } from './Store/actions';
 import { createMyasoStore } from './Store/createMyasoStore';
+import { getTower } from './Store/getters/getTower';
 import { defaultConstructorState, MyasoStore } from './Store/MyasoStore';
 import { UnitControllers } from './UnitControllers';
 import { UnitController } from './Units/UnitController';
@@ -35,9 +36,18 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
             lastState = controller(key, diff * speed, unit, lastState);
         }
 
-        store.dispatch(setStore(clone(lastState)));
+        // check if monters are death
 
-        requestAnimationFrame(tick);
+        const nextState = clone(lastState);
+
+        const tower = getTower(nextState);
+        store.dispatch(setStore(nextState));
+
+        if (tower.hp === 0) {
+            alert('game over!!!');
+        } else {
+            requestAnimationFrame(tick);
+        }
     };
 
     tick();
