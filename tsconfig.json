@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "pretty": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "target": "es2018",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost"],
+    "moduleResolution": "node",
+    "jsx": "react",
+    "noErrorTruncation": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
