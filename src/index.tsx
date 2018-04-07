@@ -1,8 +1,8 @@
+import * as clone from 'clone';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import * as clone from 'clone';
 import { App } from './Components/App/view';
 import { setStore } from './Store/actions';
 import { createMyasoStore } from './Store/createMyasoStore';
@@ -34,6 +34,8 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
             lastState = controller(key, diff * speed, unit, lastState);
         }
+
+        // check if monters are death
 
         store.dispatch(setStore(clone(lastState)));
 
