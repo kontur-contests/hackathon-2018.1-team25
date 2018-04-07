@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PointCoordinates, Size, Unit, UnitName } from '../../Store/MyasoStore';
+import { UnitClasses } from '../../Units/UnitClasses';
 import * as c from './style.pcss';
 
 export type UnitsProps = {
@@ -29,12 +30,14 @@ export class Units extends React.Component<UnitsProps, {}> {
         return <div>
             {
                 units.map((unit, i) => {
+                    const UClass = UnitClasses[unit.name];
+
                     return <div
                         key={ i }
                         className={ c.Units__unit }
                         style={ unitToStyle(unit) }
                     >
-
+                        <UClass { ...unit }/>
                     </div>;
                 })
             }
