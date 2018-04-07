@@ -1,0 +1,1 @@
+export const Piston: string;
