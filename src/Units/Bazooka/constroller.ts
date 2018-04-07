@@ -1,6 +1,7 @@
 import { getUnitsInRectangle } from '../../Store/getters/getUnitsInRectangle';
 import { shootUnits } from '../../Store/modificators/shootUnits';
 import { UnitName } from '../../Store/MyasoStore';
+import { blow } from '../../utils/blow';
 import { getAngleRelativeToOrigin } from '../../utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from '../../utils/getPointRelativeToOriginByAngleAndDistance';
 import { hasRectanglesIntersection } from '../../utils/hasRectanglesIntersection';
@@ -43,16 +44,20 @@ export const bazookaConrtoller: UnitController<UnitName.Bazooka> = (index, diff,
             height: 2,
         });
     if (isOnTarget) {
-        const intersections = getUnitsInRectangle(store, {
+        const blowingArea = {
             x: nextPosition.x - 3,
             y: nextPosition.y - 3,
             width: 6,
             height: 6,
-        })
+        };
+
+        const intersections = getUnitsInRectangle(store, blowingArea)
             .filter((targetUnit) => targetUnit !== unit && targetUnit.name !== UnitName.Tower);
 
         shootUnits(intersections, BAZOOKA_DAMAGE);
         unit.death = true;
+
+        blow(blowingArea);
 
         return store;
     } else {

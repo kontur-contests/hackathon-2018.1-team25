@@ -6,6 +6,7 @@ export type Player = {
 
 export enum UnitName {
     Zombie = 'Zombie',
+    Poo = 'Poo',
     Tower = 'Tower',
     Piston = 'Piston',
     Bazooka = 'Bazooka',
@@ -49,6 +50,7 @@ export type HealData = {
 
 export type UnitData = {
     Zombie: Character;
+    Poo: Character;
     Tower: Character & {
         weaponRotation: number;
         weaponName: WeaponBulletName;
@@ -96,6 +98,10 @@ export const UnitSize: {
         width:4,
         height:4,
     },
+    [UnitName.Poo]: {
+        width:7,
+        height:7,
+    },
     [UnitName.Piston]: {
         width: 1,
         height: 1,
@@ -117,6 +123,12 @@ export const CharacterParams: {
         hp:5,
         maxHp:5,
         xp: 1,
+        lastShootTime: 0,
+    },
+    [UnitName.Poo]: {
+        hp:10,
+        maxHp:10,
+        xp: 3,
         lastShootTime: 0,
     },
     [UnitName.Piston]: {
@@ -143,6 +155,7 @@ export const UnitMoney: {
     [key in UnitName]: number;
 } = {
     [UnitName.Zombie]: 10,
+    [UnitName.Poo]: 25,
     [UnitName.Piston]: 0,
     [UnitName.Bazooka]: 0,
     [UnitName.Tower]: 0,

@@ -82,6 +82,12 @@ export class App extends React.Component<AppDispatchProps, AppState> {
                 <UnitsConnected/>
                 <MenuConnected/>
             </div>
+            <div
+                className={c.App__animations}
+                ref={(element) => {
+                    (window as any).animationContainer = element;
+                }}
+            />
         </div>;
     }
 

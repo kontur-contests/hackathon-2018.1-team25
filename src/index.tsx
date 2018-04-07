@@ -115,9 +115,9 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
         // generate monster
         function createMonster(): Unit<UnitName> {
             const monsterName: UnitName = level === 1
-                ? UnitName.Zombie
+                ? UnitName.Poo
                 : level < 3
-                    ? UnitName.Zombie
+                    ? UnitName.Poo
                     : level < 7
                         ? UnitName.Zombie
                         : level < 12
@@ -131,7 +131,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                                         : UnitName.Zombie;
 
             const angle = Math.random() * 360;
-            const point = getPointRelativeToOriginByAngleAndDistance(100, angle);
+            const point = getPointRelativeToOriginByAngleAndDistance(75, angle);
 
             return {
                 name: monsterName,
