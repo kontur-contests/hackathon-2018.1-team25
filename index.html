@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <!--TODO: favicon.ico-->
-    <title>Animation Constructor</title>
-    <style>
-        html, body, #container {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-    </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<!--TODO: favicon.ico-->
+	<title>Animation Constructor</title>
+	<style>
+		html, body, #container {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			cursor: url(images/cursor-scope.png), default;
+		}
+		.pointer {
+			cursor: url(images/pointer.png), pointer;
+		}
+	</style>
 </head>
 <body>
 <div id="container"></div>
 <script src="./dist/costructor.js"></script>
 <script>
-    createMyaso(document.getElementById('container'));
+  createMyaso(document.getElementById('container'));
 </script>
 </body>
 </html>
