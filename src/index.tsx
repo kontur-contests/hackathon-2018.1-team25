@@ -21,9 +21,9 @@ import { UnitController } from './Units/UnitController';
 import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from './utils/getPointRelativeToOriginByAngleAndDistance';
 import { addXp } from './utils/playerInteractions';
-import {runAudio} from "./utils/runAudio";
+//import {runAudio} from "./utils/runAudio";
 
-runAudio();
+//runAudio();
 
 function createAnimaionConstoller(store: Store<MyasoStore>) {
     let lastTime = Date.now();
