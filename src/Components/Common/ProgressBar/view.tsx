@@ -24,7 +24,9 @@ export default class ProgressBar extends React.Component<ProgressBarProps> {
                             backgroundColor: frontColor,
                         }}/>
                     }
-                    <div className={styles.Bar__title}>{now} / {max}</div>
+                    <div className={styles.Bar__titleWrapper}>
+                        <div className={styles.Bar__title}>{now} / {max}</div>
+                    </div>
                 </div>
             </div>
         )
