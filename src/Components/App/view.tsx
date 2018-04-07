@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { PointCoordinates, Size } from '../../Store/MyasoStore';
-import { DragListener } from '../../Store/utils/DragListener';
-import { addElementEventListener } from '../../utils/addElementEventListener';
-import { ResizeSensor } from '../../utils/ResizeSensor';
+import {PointCoordinates, Size} from '../../Store/MyasoStore';
+import {DragListener} from '../../Store/utils/DragListener';
+import {addElementEventListener} from '../../utils/addElementEventListener';
+import {ResizeSensor} from '../../utils/ResizeSensor';
 import HUD from '../HUD/view'
 import {MenuConnected} from "../MenuUpdateWeapon/menu";
-import { UnitsConnected } from '../Units/connected';
+import {UnitsConnected} from '../Units/connected';
 import * as c from './style.pcss';
 
 type AppState = {
@@ -45,36 +45,37 @@ export class App extends React.Component<AppDispatchProps, AppState> {
             : (height - squareSize) / 2;
 
         return <div
-            className={ c.App }
-            ref={ (element) => {
+            className={c.App}
+            ref={(element) => {
                 this.container = element!;
-            } }
+            }}
         >
             <HUD/>
             <div
-                className={ c.App__square }
-                style={ {
+                className={c.App__square}
+                style={{
                     width: `${squareSize}px`,
                     height: `${squareSize}px`,
                     left: `${left}px`,
                     top: `${top}px`,
-                } }
+                }}
             >
                 <div
-                    className={ c.App__background }
-                    ref={ (element) => {
+                    className={c.App__background}
+                    ref={(element) => {
                         this.container = element!;
-                    } }
+                    }}
                 >
                     <canvas
 
-                        ref={ (element) => {
+                        ref={(element) => {
                             (window as any).canvas = element!;
-                        } }
-                        style={ {
+                        }}
+                        style={{
                             width: '100%',
                             height: '100%'
-                        } }
+                        }}
+                        id={'canvas'}
                     />
 
 
@@ -87,7 +88,7 @@ export class App extends React.Component<AppDispatchProps, AppState> {
 
     public componentDidMount() {
         this.resizeSensor = new ResizeSensor(this.container!, (size) => {
-            this.setState({ size });
+            this.setState({size});
         });
 
         const size = this.resizeSensor.getSize();
@@ -124,7 +125,7 @@ export class App extends React.Component<AppDispatchProps, AppState> {
             size,
         });
 
-        const { setShotPosition } = this.props;
+        const {setShotPosition} = this.props;
 
         new DragListener(this.container!, {
             onStart: (dragPosition) => {
