@@ -6375,9 +6375,9 @@ const getAngleRelativeToOrigin_1 = __webpack_require__(6);
 const getPointRelativeToOriginByAngleAndDistance_1 = __webpack_require__(9);
 const playerInteractions_1 = __webpack_require__(52);
 const startStopAudio_1 = __webpack_require__(178);
-const runAudio_1 = __webpack_require__(180);
+const runAudio_1 = __webpack_require__(179);
 window.runAudio = runAudio_1.runAudio;
-const { addBlood } = __webpack_require__(179);
+const { addBlood } = __webpack_require__(180);
 function createAnimaionConstoller(store) {
     let lastTime = Date.now();
     let lastShotTime = lastTime;
@@ -21058,6 +21058,32 @@ exports.playSound = playSound;
 
 /***/ }),
 /* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+let count = 0;
+const audio = new Audio();
+audio.volume = 0.2;
+function runAudio() {
+    const playlist = ['audio/back/1.mp3', 'audio/back/2.mp3', 'audio/back/3.mp3', 'audio/back/4.mp3'];
+    if (count < playlist.length + 1) {
+        audio.src = `${playlist[count]}`;
+        audio.play();
+        audio.addEventListener('ended', () => {
+            count++;
+            runAudio();
+        });
+    } else {
+        count = 0;
+    }
+}
+exports.runAudio = runAudio;
+
+/***/ }),
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21084,32 +21110,6 @@ function addBlood(coordinates) {
     ctx.drawImage(pic, x + canvasPositionX, y + canvasPositionY);
   };
 }
-
-/***/ }),
-/* 180 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-let count = 0;
-const audio = new Audio();
-audio.volume = 0.2;
-function runAudio() {
-    const playlist = ['audio/back/1.mp3', 'audio/back/2.mp3', 'audio/back/3.mp3', 'audio/back/4.mp3'];
-    if (count < playlist.length + 1) {
-        audio.src = `${playlist[count]}`;
-        audio.play();
-        audio.addEventListener('ended', () => {
-            count++;
-            runAudio();
-        });
-    } else {
-        count = 0;
-    }
-}
-exports.runAudio = runAudio;
 
 /***/ })
 /******/ ]);
