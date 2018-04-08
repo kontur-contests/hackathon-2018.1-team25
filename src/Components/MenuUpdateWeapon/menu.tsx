@@ -70,8 +70,9 @@ class Menu extends React.Component<MenuProps> {
                     imageUrl="./images/weapons/Threegun.png"
                     bought={this.props.weapons[UnitName.Threegun]}
                     chosen={this.props.currentWeapon === UnitName.Threegun}
-                    enabled={player => player.money >= 10000}
-                    action={this.weaponClick(UnitName.Threegun, 10000)}
+                    cost={8000}
+                    enabled={player => player.money >= 8000}
+                    action={this.weaponClick(UnitName.Threegun, 8000)}
                     isLast={true}
                 />
             </div>
