@@ -21,7 +21,7 @@ import { UnitControllers } from './UnitControllers';
 import { UnitController } from './Units/UnitController';
 import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from './utils/getPointRelativeToOriginByAngleAndDistance';
-import { addXp } from './utils/playerInteractions';
+import {addXp, getNextLevelHp} from './utils/playerInteractions';
 import { playSound, SoundName } from './utils/startStopAudio';
 // import {runAudio} from './utils/runAudio';
 // runAudio();
@@ -62,6 +62,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
         //check if death
         let someMonsterDeath = false;
+        let updateHealth = false;
         lastState = {
             ...lastState,
             units: lastState.units.filter((unit: any) => {
@@ -77,6 +78,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
                     if (lastState.player.level !== level) {
                         console.log('NEXT_LEVEL');
+                        updateHealth = true;
                     }
 
                     lastState.player.level = level;
@@ -234,6 +236,11 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
         }
 
         const tower = getTower(nextState);
+        if (updateHealth) {
+            const nextLevelHp = getNextLevelHp(level);
+            tower.hp = nextLevelHp;
+            tower.maxHp = nextLevelHp;
+        }
         store.dispatch(setStore(nextState));
 
         if (tower.hp === 0) {

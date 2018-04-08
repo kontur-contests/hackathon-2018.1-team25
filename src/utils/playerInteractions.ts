@@ -29,3 +29,8 @@ export function addXp(playerXpInfo: PlayerXpInfo, addingXp: number): PlayerXpInf
             };
     }
 }
+
+export function getNextLevelHp(nextLevel: number): number {
+    const base = 100;
+    return base * nextLevel;
+}
