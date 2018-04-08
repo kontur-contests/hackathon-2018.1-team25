@@ -50,9 +50,10 @@ export class Units extends React.Component<UnitsProps, {}> {
                         const {
                             hp,
                             maxHp,
+                            name,
                         } = unit as any;
 
-                        return typeof hp === 'number'
+                        return typeof hp === 'number' && name !== UnitName.Tower
                             ? <div
                                 key={ i }
                                 className={ c.Units__hp }
@@ -64,8 +65,13 @@ export class Units extends React.Component<UnitsProps, {}> {
                                     rotation: 0,
                                 }) }
                             >
-                                <div className={ c.Units__hp__text }>
-                                    { `${hp}/${maxHp}` }
+                                <div className={ c.Units__hp__container }>
+                                    <div
+                                        className={ c.Units__hp__container__line }
+                                        style={ {
+                                            width: `${hp * 100 / maxHp}%`,
+                                        } }
+                                    />
                                 </div>
                             </div>
                             : null

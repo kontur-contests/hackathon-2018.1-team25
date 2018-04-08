@@ -1,16 +1,15 @@
 import { getUnitsInRectangle } from '../../Store/getters/getUnitsInRectangle';
 import { shootUnits } from '../../Store/modificators/shootUnits';
 import { UnitName } from '../../Store/MyasoStore';
-import { blow } from '../../utils/blow';
 import { getAngleRelativeToOrigin } from '../../utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from '../../utils/getPointRelativeToOriginByAngleAndDistance';
 import { hasRectanglesIntersection } from '../../utils/hasRectanglesIntersection';
 import { isInMirrorQuardant } from '../../utils/isInMirrorQuardant';
 import { UnitController } from '../UnitController';
 
-const BAZOOKA_DAMAGE = 5;
+const PISTON_DAMAGE = 1.2;
 
-export const bazookaConrtoller: UnitController<UnitName.Bazooka> = (index, diff, unit, store) => {
+export const threegunConrtoller: UnitController<UnitName.Threegun> = (index, diff, unit, store) => {
     const {
         destination,
     } = unit;
@@ -23,11 +22,11 @@ export const bazookaConrtoller: UnitController<UnitName.Bazooka> = (index, diff,
     const rotation = getAngleRelativeToOrigin(positionDiff);
 
 
-    const nextPositionOffset = getPointRelativeToOriginByAngleAndDistance(diff / 20, rotation);
+    const nextPositionOffset = getPointRelativeToOriginByAngleAndDistance(diff / 10, rotation);
     const nextPosition = {
         x: unit.x + nextPositionOffset.x,
         y: unit.y + nextPositionOffset.y,
-    };
+    }
 
     const nextPositionRect = {
         x: nextPosition.x - 0.5,
@@ -35,6 +34,12 @@ export const bazookaConrtoller: UnitController<UnitName.Bazooka> = (index, diff,
         width: 1,
         height: 1,
     };
+
+    const intersections = getUnitsInRectangle(store, nextPositionRect)
+        .filter((targetUnit) => targetUnit !== unit && targetUnit.name !== UnitName.Tower);
+    if (intersections.length) {
+        shootUnits(intersections, PISTON_DAMAGE);
+    }
 
     const isOnTarget = isInMirrorQuardant(unit, nextPosition, destination)
         || hasRectanglesIntersection(nextPositionRect, {
@@ -44,20 +49,8 @@ export const bazookaConrtoller: UnitController<UnitName.Bazooka> = (index, diff,
             height: 2,
         });
     if (isOnTarget) {
-        const blowingArea = {
-            x: destination.x - 3,
-            y: destination.y - 3,
-            width: 6,
-            height: 6,
-        };
-
-        const intersections = getUnitsInRectangle(store, blowingArea)
-            .filter((targetUnit) => targetUnit !== unit && targetUnit.name !== UnitName.Tower);
-
-        shootUnits(intersections, BAZOOKA_DAMAGE);
+        shootUnits(intersections, PISTON_DAMAGE);
         unit.death = true;
-
-        blow(blowingArea);
 
         return store;
     } else {

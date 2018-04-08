@@ -1,40 +1,67 @@
 .Hud {
-    position: absolute;
-    top: 10px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  &__xp {
+    position: relative;
+    float: left;
+    top: 0;
     left: 0;
-    width: 100%;
-    z-index: 1000;
 
-    &__xp {
-        position: relative;
-        float: left;
-        top: 0;
-        left: 0;
+    &__level {
+      display: inline-block;
+      padding-right: 10px;
+      vertical-align: middle;
+      color: wheat;
+      font-size: 26px;
+    }
 
-      &__label {
-          display: inline-block;
-          padding-right: 10px;
-          padding-bottom: 21px;
-          vertical-align: middle;
-          color: wheat;
-          font-size: 26px;
-      }
+    &__label {
+      display: inline-block;
+      padding-right: 10px;
+      margin-top: -20px;
+      vertical-align: middle;
+      color: wheat;
+      font-size: 26px;
+    }
+
+    &__progressContainer {
+      display: inline-block;
 
       &__progress {
-          display: inline-block;
-          width: 370px;
+        display: inline-block;
+        width: 370px;
 
-          &__bar {
-              display: inline-block;
-              width: 300px;
-          }
+        &__bar {
+          display: inline-block;
+          width: 300px;
+        }
       }
     }
+  }
 
-    &__money {
-        position: relative;
-        text-align: right;
-        top: 0;
-        right: 0;
+  &__money {
+    position: relative;
+    text-align: right;
+    top: 0;
+    right: 0;
+
+    &__label {
+      display: inline-block;
+      color: wheat;
+      font-size: 26px;
     }
+
+    &__button {
+      position: relative;
+      right: 20px;
+      display: inline-block;
+      font-size: 22px;
+      color: floralwhite;
+      cursor: pointer;
+    }
+  }
 }

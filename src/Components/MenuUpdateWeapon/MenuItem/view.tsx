@@ -2,6 +2,7 @@ import * as React from 'react';
 import {MyasoStore, Player} from '../../../Store/MyasoStore'
 import {connect, MapStateToPropsFactory} from "react-redux";
 import * as styles from './style.pcss'
+import * as cn from 'classnames';
 
 type MenuItemProps = MenuConnectedProps & {
     player: Player;
@@ -11,9 +12,13 @@ class MenuItem extends React.Component<MenuItemProps> {
     render() {
         const enabled = this.props.enabled(this.props.player);
         return (
-          <div className={styles.MenuItem} onClick={this.handleClick}>
-              <div className={styles.MenuItem__element} style={{backgroundColor: this.props.imageUrl}}>
-                  {!enabled && <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}/>}
+          <div className={cn(styles.MenuItem, this.props.isLast ? null : styles.MenuItem__padding)} onClick={this.handleClick}>
+              <div className={cn(styles.MenuItem__element, this.props.chosen ? styles.MenuItem__element__chosen : null)} style={{backgroundImage: `url(${this.props.imageUrl})`}}>
+                  {!this.props.bought && !enabled &&
+                    <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}>
+                        <div className={styles.MenuItem__element__overlay__price}>Cost: {this.props.cost}</div>
+                    </div>
+                  }
               </div>
           </div>
         );
@@ -26,6 +31,10 @@ class MenuItem extends React.Component<MenuItemProps> {
 
 type MenuConnectedProps = {
     imageUrl: string;
+    chosen: boolean;
+    bought: boolean;
+    isLast?: boolean | undefined;
+    cost: number;
     enabled: (player: Player) => boolean;
     action: () => void;
 }
