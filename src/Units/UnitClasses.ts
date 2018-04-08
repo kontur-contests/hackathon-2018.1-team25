@@ -1,5 +1,6 @@
 import { UnitName } from '../Store/MyasoStore';
 import { Bazooka } from './Bazooka/view';
+import { Bubble } from './Bubble/view';
 import { Machinegun } from './Machinegun/view';
 import { Piston } from './Piston/view';
 import { Poo } from './Poo/view';
@@ -16,4 +17,5 @@ export const UnitClasses: {
     Bazooka,
     Poo,
     Machinegun,
+    Bubble,
 };

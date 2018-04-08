@@ -7,17 +7,25 @@
         position: absolute;
         pointer-events: none;
 
-        &__text {
-            opacity: 0.6;
+        &__container {
             position: absolute;
-            pointer-events: none;
-            left: -24px;
-            right: -24px;
+            opacity: .6;
+            left: -20px;
+            right: -20px;
             text-align: center;
             font-size: 10px;
-            top: -14px;
-            background: wheat;
-            border: 1px solid rgba(0, 0, 0, 0.5);
+            top: -10px;
+            background: red;
+            /* border: 1px solid rgba(0,0,0,.5); */
+            height: 4px;
+
+            &__line {
+                position: absolute;
+                height: 100%;
+                left: 0;
+                top: 0;
+                background-color: green;
+            }
         }
     }
 }

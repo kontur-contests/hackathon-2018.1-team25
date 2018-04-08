@@ -132,24 +132,26 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
             const monsterName: UnitName = level < 3
                 ? UnitName.Zombie
                 : level < 5
-                    ? Math.random() < 0.2
+                    ? Math.random() < 0.4
                         ? UnitName.Poo
                         : UnitName.Zombie
                     : level < 7
-                        ? Math.random() < 0.6
-                            ? UnitName.Poo
-                            : UnitName.Zombie
+                        ? Math.random() < 0.4
+                            ? UnitName.Zombie
+                            : Math.random() < 0.8
+                                ? UnitName.Bubble
+                                : UnitName.Poo
                         : level < 10
-                            ? Math.random() < 0.8
+                            ? Math.random() < 0.5
                                 ? UnitName.Poo
-                                : UnitName.Zombie
+                                : UnitName.Bubble
                             : level < 15
-                                ? UnitName.Poo
+                                ? UnitName.Bubble
                                 : level < 30
-                                    ? UnitName.Poo
+                                    ? UnitName.Bubble
                                     : level < 50
-                                        ? UnitName.Poo
-                                        : UnitName.Poo;
+                                        ? UnitName.Bubble
+                                        : UnitName.Bubble;
 
             const angle = Math.random() * 360;
             const point = getPointRelativeToOriginByAngleAndDistance(75, angle);

@@ -7,6 +7,7 @@ export type Player = {
 export enum UnitName {
     Zombie = 'Zombie',
     Poo = 'Poo',
+    Bubble = 'Bubble',
     Tower = 'Tower',
     Piston = 'Piston',
     Bazooka = 'Bazooka',
@@ -63,6 +64,7 @@ export type WeaponsData = {
 export type UnitData = {
     Zombie: Character;
     Poo: Character;
+    Bubble: Character;
     Tower: Character & {
         weaponRotation: number;
         weaponName: WeaponBulletName;
@@ -117,6 +119,10 @@ export const UnitSize: {
         width:7,
         height:7,
     },
+    [UnitName.Bubble]: {
+        width:7,
+        height:7,
+    },
     [UnitName.Piston]: {
         width: 1,
         height: 1,
@@ -150,6 +156,12 @@ export const CharacterParams: {
         xp: 3,
         lastShootTime: 0,
     },
+    [UnitName.Bubble]: {
+        hp:100,
+        maxHp:100,
+        xp: 10,
+        lastShootTime: 0,
+    },
     [UnitName.Piston]: {
         hp: 0,
         maxHp: 0,
@@ -181,6 +193,7 @@ export const UnitMoney: {
 } = {
     [UnitName.Zombie]: 10,
     [UnitName.Poo]: 25,
+    [UnitName.Bubble]: 50,
     [UnitName.Piston]: 0,
     [UnitName.Machinegun]: 0,
     [UnitName.Bazooka]: 0,
