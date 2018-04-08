@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MyasoStore, Player} from '../../Store/MyasoStore';
+import {MyasoStore, Player, Unit, UnitName} from '../../Store/MyasoStore';
 import {connect, MapDispatchToPropsFunction, MapStateToPropsFactory} from 'react-redux';
 import ProgressBar from "../Common/ProgressBar/view";
 import {getNextLevelXp} from '../../utils/playerInteractions';
@@ -8,6 +8,7 @@ import {toggleMenu} from "../../Store/actions";
 
 type StateToProps = {
     player: Player;
+    tower: Unit<UnitName.Tower>;
     showShopMenu: boolean;
 }
 
@@ -21,17 +22,25 @@ export type HudProps =
 
 class Hud extends React.Component<HudProps, {}> {
     public render() {
-        const {player} = this.props;
+        const {player, tower} = this.props;
         const nextLevelXp = getNextLevelXp(player.level + 1);
 
         return (
             <div className={styles.Hud}>
                 <div className={styles.Hud__xp}>
-                    <div className={styles.Hud__xp__label}>Level: {player.level}</div>
-                    <div className={styles.Hud__xp__progress}>
-                        <div className={styles.Hud__xp__label}>XP: </div>
-                        <div className={styles.Hud__xp__progress__bar}>
-                            <ProgressBar now={player.xp} max={nextLevelXp} frontColor="#cac545" backColor="#dbdcaa"/>
+                    <div className={styles.Hud__xp__level} style={{paddingBottom: 86}}>Level: {player.level}</div>
+                    <div className={styles.Hud__xp__progressContainer}>
+                        <div className={styles.Hud__xp__progressContainer__progress}>
+                            <div className={styles.Hud__xp__label}>XP: </div>
+                            <div className={styles.Hud__xp__progressContainer__progress__bar}>
+                                <ProgressBar now={player.xp} max={nextLevelXp} frontColor="#cac545" backColor="#dbdcaa"/>
+                            </div>
+                        </div><br/>
+                        <div className={styles.Hud__xp__progressContainer__progress}>
+                            <div className={styles.Hud__xp__label}>HP: </div>
+                            <div className={styles.Hud__xp__progressContainer__progress__bar}>
+                                <ProgressBar now={tower.hp} max={tower.maxHp} frontColor="#d04712" backColor="#fb9797"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,9 +54,11 @@ class Hud extends React.Component<HudProps, {}> {
 }
 
 const mapStateToPropsFactory: MapStateToPropsFactory<StateToProps, {}, MyasoStore> = (initialStore, initialOwnProps) => {
-    return ({player, showShopMenu}, ownProps): StateToProps => {
+    return ({player, showShopMenu, units}, ownProps): StateToProps => {
+        const tower = units.find(({name}) => name === UnitName.Tower) as Unit<UnitName.Tower>;
         return {
             player,
+            tower,
             showShopMenu,
         };
     };
