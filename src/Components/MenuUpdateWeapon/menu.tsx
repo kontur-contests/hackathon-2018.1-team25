@@ -33,6 +33,7 @@ class Menu extends React.Component<MenuProps> {
                     imageUrl="./images/first-aid-kit.png"
                     bought={false}
                     chosen={false}
+                    cost={150}
                     enabled={player => player.money >= 150}
                     action={() => {
                     console.log('buy medkit');
@@ -45,6 +46,7 @@ class Menu extends React.Component<MenuProps> {
                     imageUrl="./images/weapons/Piston.png"
                     bought={this.props.weapons[UnitName.Piston]}
                     chosen={this.props.currentWeapon === UnitName.Piston}
+                    cost={0}
                     enabled={player => true}
                     action={this.weaponClick(UnitName.Piston, 0)}
                 />
@@ -52,6 +54,7 @@ class Menu extends React.Component<MenuProps> {
                     imageUrl="./images/weapons/Bazooka.png"
                     bought={this.props.weapons[UnitName.Bazooka]}
                     chosen={this.props.currentWeapon === UnitName.Bazooka}
+                    cost={200}
                     enabled={player => player.money >= 200}
                     action={this.weaponClick(UnitName.Bazooka, 200)}
                 />
@@ -59,6 +62,7 @@ class Menu extends React.Component<MenuProps> {
                     imageUrl="./images/weapons/Machinegun.png"
                     bought={this.props.weapons[UnitName.Machinegun]}
                     chosen={this.props.currentWeapon === UnitName.Machinegun}
+                    cost={1000}
                     enabled={player => player.money >= 1000}
                     action={this.weaponClick(UnitName.Machinegun, 1000)}
                 />
