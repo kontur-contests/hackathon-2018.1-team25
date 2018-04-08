@@ -26,10 +26,7 @@ import { playSound, SoundName } from './utils/startStopAudio';
 // import {runAudio} from './utils/runAudio';
 // runAudio();
 
-const {addBlood} = require('./utils/addBlood') ;
-
-
-
+const { addBlood } = require('./utils/addBlood');
 
 function createAnimaionConstoller(store: Store<MyasoStore>) {
     let lastTime = Date.now();
@@ -44,6 +41,8 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
         lastTime = now;
 
         const state = store.getState();
+
+        (window as any).getState = () => store.getState();
 
         const {
             units,
@@ -81,7 +80,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     lastState.player.level = level;
                     lastState.player.xp = xp;
                     lastState.player.money += unit.money;
-                    addBlood({x: unit.x, y: unit.y});
+                    addBlood({ x: unit.x, y: unit.y });
                     return false;
                 }
 
@@ -128,21 +127,27 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
 
         // generate monster
         function createMonster(): Unit<UnitName> {
-            const monsterName: UnitName = level === 1
-                ? UnitName.Poo
-                : level < 3
-                    ? UnitName.Poo
+            const monsterName: UnitName = level < 3
+                ? UnitName.Zombie
+                : level < 5
+                    ? Math.random() < 0.2
+                        ? UnitName.Poo
+                        : UnitName.Zombie
                     : level < 7
-                        ? UnitName.Zombie
-                        : level < 12
-                            ? UnitName.Zombie
-                            : level < 20
-                                ? UnitName.Zombie
+                        ? Math.random() < 0.6
+                            ? UnitName.Poo
+                            : UnitName.Zombie
+                        : level < 10
+                            ? Math.random() < 0.8
+                                ? UnitName.Poo
+                                : UnitName.Zombie
+                            : level < 15
+                                ? UnitName.Poo
                                 : level < 30
-                                    ? UnitName.Zombie
+                                    ? UnitName.Poo
                                     : level < 50
-                                        ? UnitName.Zombie
-                                        : UnitName.Zombie;
+                                        ? UnitName.Poo
+                                        : UnitName.Poo;
 
             const angle = Math.random() * 360;
             const point = getPointRelativeToOriginByAngleAndDistance(75, angle);
@@ -160,10 +165,10 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
         }
 
         const level = nextState.player.level;
-        const monsterGenerateTime: number = level === 1
-            ? 2000
-            : level < 3
-                ? 1500
+        const monsterGenerateTime: number = level < 2
+            ? 1500
+            : level < 6
+                ? 1200
                 : level < 7
                     ? 1000
                     : level < 12
