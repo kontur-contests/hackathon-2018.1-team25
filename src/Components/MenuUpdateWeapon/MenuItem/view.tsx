@@ -12,8 +12,8 @@ class MenuItem extends React.Component<MenuItemProps> {
     render() {
         const enabled = this.props.enabled(this.props.player);
         return (
-          <div className={styles.MenuItem} onClick={this.handleClick}>
-              <div className={cn(styles.MenuItem__element, this.props.choosen ? styles.MenuItem__element__chosen : null)} style={{backgroundImage: `url(${this.props.imageUrl})`}}>
+          <div className={cn(styles.MenuItem, this.props.isLast ? null : styles.MenuItem__padding)} onClick={this.handleClick}>
+              <div className={cn(styles.MenuItem__element, this.props.chosen ? styles.MenuItem__element__chosen : null)} style={{backgroundImage: `url(${this.props.imageUrl})`}}>
                   {!this.props.bought && !enabled && <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}/>}
               </div>
           </div>
@@ -27,8 +27,9 @@ class MenuItem extends React.Component<MenuItemProps> {
 
 type MenuConnectedProps = {
     imageUrl: string;
-    choosen: boolean;
+    chosen: boolean;
     bought: boolean;
+    isLast?: boolean | undefined;
     enabled: (player: Player) => boolean;
     action: () => void;
 }

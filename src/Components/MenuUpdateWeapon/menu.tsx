@@ -31,7 +31,7 @@ class Menu extends React.Component<MenuProps> {
                 <MenuItemConnected
                     imageUrl="./images/first-aid-kit.png"
                     bought={false}
-                    choosen={false}
+                    chosen={false}
                     enabled={player => player.money >= 150}
                     action={() => {
                     console.log('buy medkit');
@@ -43,16 +43,24 @@ class Menu extends React.Component<MenuProps> {
                 <MenuItemConnected
                     imageUrl="./images/weapons/Piston.png"
                     bought={this.props.weapons[UnitName.Piston]}
-                    choosen={this.props.currentWeapon === UnitName.Piston}
+                    chosen={this.props.currentWeapon === UnitName.Piston}
                     enabled={player => true}
                     action={this.weaponClick(UnitName.Piston, 0)}
                 />
                 <MenuItemConnected
                     imageUrl="./images/weapons/Bazooka.png"
                     bought={this.props.weapons[UnitName.Bazooka]}
-                    choosen={this.props.currentWeapon === UnitName.Bazooka}
+                    chosen={this.props.currentWeapon === UnitName.Bazooka}
                     enabled={player => player.money >= 200}
                     action={this.weaponClick(UnitName.Bazooka, 200)}
+                />
+                <MenuItemConnected
+                    imageUrl="./images/weapons/Machinegun.png"
+                    bought={this.props.weapons[UnitName.Machinegun]}
+                    chosen={this.props.currentWeapon === UnitName.Machinegun}
+                    enabled={player => player.money >= 1000}
+                    action={this.weaponClick(UnitName.Machinegun, 1000)}
+                    isLast={true}
                 />
             </div>
         );
