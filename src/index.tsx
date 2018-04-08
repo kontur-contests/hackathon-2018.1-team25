@@ -22,8 +22,9 @@ import { UnitController } from './Units/UnitController';
 import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from './utils/getPointRelativeToOriginByAngleAndDistance';
 import { addXp } from './utils/playerInteractions';
-//import {runAudio} from './utils/runAudio';
-//runAudio();
+import { playSound, SoundName } from './utils/startStopAudio';
+// import {runAudio} from './utils/runAudio';
+// runAudio();
 
 const {addBlood} = require('./utils/addBlood') ;
 
@@ -59,6 +60,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
         }
 
         //check if death
+        let someMonsterDeath = false;
         lastState = {
             ...lastState,
             units: lastState.units.filter((unit: any) => {
@@ -66,6 +68,7 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     && unit.hp <= 0
                     && unit.name !== UnitName.Tower;
                 if (deathByHp) {
+                    someMonsterDeath = true;
                     const {
                         level,
                         xp,
@@ -82,13 +85,17 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     return false;
                 }
 
-
                 return unit.death !== true;
             }),
         };
 
+        if (someMonsterDeath && Math.random() > 0.8) {
+            playSound(SoundName.ZombieShot);
+        }
+
         const nextState = clone(lastState);
 
+        // create bullet
         const { shotPosition } = nextState;
         if (shotPosition) {
             const shotDiff = now - lastShotTime;
@@ -114,6 +121,8 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                 };
 
                 nextState.units.push(weaponBullet);
+
+                playSound(SoundName.Pistol);
             }
         }
 
