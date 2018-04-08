@@ -16,7 +16,7 @@ export function playSound(soundName: SoundName) {
             play(path + 'weapons/pistol.mp3', 0.1);
             break;
         case SoundName.ZombieShot:
-            play(path + `monsters/${Math.floor(Math.random() * 12)}.mp3`);
+            play(path + `monsters/${Math.floor(Math.random() * 12)}.mp3`, 0.2);
             break;
     }
 }
