@@ -46,7 +46,7 @@ class Hud extends React.Component<HudProps, {}> {
                 </div>
                 <div className={styles.Hud__money}>
                     <div className={styles.Hud__money__label}>Money: {player.money}</div><br/>
-                    <div className={styles.Hud__money__button} onClick={() => this.props.toggleShopMenu(!this.props.showShopMenu)}>{this.props.showShopMenu ? "-" : "+"} buy</div>
+                    <div className={styles.Hud__money__button} onClick={() => this.props.toggleShopMenu(!this.props.showShopMenu)}>{this.props.showShopMenu ? "CLOSE" : "OPEN"} SHOP</div>
                 </div>
             </div>
         );
