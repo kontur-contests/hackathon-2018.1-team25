@@ -9,7 +9,7 @@ import { UnitController } from '../UnitController';
 
 const PISTON_DAMAGE = 1.2;
 
-export const machinegunConrtoller: UnitController<UnitName.Machinegun> = (index, diff, unit, store) => {
+export const threegunConrtoller: UnitController<UnitName.Threegun> = (index, diff, unit, store) => {
     const {
         destination,
     } = unit;

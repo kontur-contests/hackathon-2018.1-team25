@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect, MapDispatchToPropsFunction, MapStateToPropsFactory} from 'react-redux';
 import {HealData, MyasoStore, UnitName, WeaponBulletName, WeaponRevealData, WeaponsData} from '../../Store/MyasoStore';
 import {MenuItemConnected} from './MenuItem/view';
-import {chooseWeapon, heal, revealWeapon} from '../../Store/actions';
+import { chooseWeapon, heal, revealWeapon, toggleMenu } from '../../Store/actions';
 import * as c from './style.pcss';
 import * as cx from 'classnames';
 
@@ -17,6 +17,7 @@ type DispatchToProps = {
     heal: (healData: HealData) => void;
     revealWeapon: (weaponRevealData: WeaponRevealData) => void;
     chooseWeapon: (weaponName: WeaponBulletName) => void;
+    toggleMenu: (setVisible: boolean) => void;
 }
 
 type MenuProps =
@@ -60,6 +61,13 @@ class Menu extends React.Component<MenuProps> {
                     chosen={this.props.currentWeapon === UnitName.Machinegun}
                     enabled={player => player.money >= 1000}
                     action={this.weaponClick(UnitName.Machinegun, 1000)}
+                />
+                <MenuItemConnected
+                    imageUrl="./images/weapons/Threegun.png"
+                    bought={this.props.weapons[UnitName.Threegun]}
+                    chosen={this.props.currentWeapon === UnitName.Threegun}
+                    enabled={player => player.money >= 10000}
+                    action={this.weaponClick(UnitName.Threegun, 10000)}
                     isLast={true}
                 />
             </div>
@@ -68,6 +76,8 @@ class Menu extends React.Component<MenuProps> {
 
     weaponClick = (weaponName: WeaponBulletName, cost: number) => {
         return () => {
+            this.props.toggleMenu(false);
+
             if (this.props.currentWeapon === weaponName)
                 return;
             if (!this.props.weapons[weaponName]) {
@@ -100,6 +110,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchToProps, {}> =
             heal: healData => {dispatch(heal(healData))},
             revealWeapon: weaponRevealData => {dispatch(revealWeapon(weaponRevealData))},
             chooseWeapon: weaponName => {dispatch(chooseWeapon(weaponName))},
+            toggleMenu: (visibility) => {dispatch(toggleMenu(visibility))},
         };
     };
 

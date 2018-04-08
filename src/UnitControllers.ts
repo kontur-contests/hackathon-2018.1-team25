@@ -4,6 +4,7 @@ import { bubbleConrtoller } from './Units/Bubble/constroller';
 import { machinegunConrtoller } from './Units/Machinegun/constroller';
 import { pistonConrtoller } from './Units/Piston/constroller';
 import { pooConrtoller } from './Units/Poo/constroller';
+import { threegunConrtoller } from './Units/Threegun/constroller';
 import { towerConrtoller } from './Units/Tower/constroller';
 import { UnitController } from './Units/UnitController';
 import { zombieConrtoller } from './Units/Zombie/constroller';
@@ -18,4 +19,5 @@ export const UnitControllers: {
     [UnitName.Piston]: pistonConrtoller,
     [UnitName.Bazooka]: bazookaConrtoller,
     [UnitName.Machinegun]: machinegunConrtoller,
+    [UnitName.Threegun]: threegunConrtoller,
 };

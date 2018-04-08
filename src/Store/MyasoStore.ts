@@ -12,6 +12,7 @@ export enum UnitName {
     Piston = 'Piston',
     Bazooka = 'Bazooka',
     Machinegun = 'Machinegun',
+    Threegun = 'Threegun',
 }
 
 export type Rotaion = {
@@ -59,6 +60,7 @@ export type WeaponsData = {
     [UnitName.Piston]: boolean;
     [UnitName.Bazooka]: boolean;
     [UnitName.Machinegun]: boolean;
+    [UnitName.Threegun]: boolean;
 }
 
 export type UnitData = {
@@ -72,6 +74,7 @@ export type UnitData = {
     Piston: WeaponBullet;
     Bazooka: WeaponBullet;
     Machinegun: WeaponBullet;
+    Threegun: WeaponBullet;
 };
 
 export type Unit<T extends UnitName> =
@@ -98,7 +101,7 @@ export type MyasoStore = {
 
 export const TOWER_SIZE = 11;
 
-export type WeaponBulletName = UnitName.Piston | UnitName.Bazooka | UnitName.Machinegun;
+export type WeaponBulletName = UnitName.Piston | UnitName.Bazooka | UnitName.Machinegun | UnitName.Threegun;
 
 export const WeaponIntervals: {
     [key in WeaponBulletName]: number;
@@ -106,6 +109,7 @@ export const WeaponIntervals: {
     [UnitName.Piston]: 500,
     [UnitName.Bazooka]: 500,
     [UnitName.Machinegun]: 100,
+    [UnitName.Threegun]: 100,
 };
 
 export const UnitSize: {
@@ -132,6 +136,10 @@ export const UnitSize: {
         height: 1,
     },
     [UnitName.Machinegun]: {
+        width: 1,
+        height: 1,
+    },
+    [UnitName.Threegun]: {
         width: 1,
         height: 1,
     },
@@ -174,6 +182,12 @@ export const CharacterParams: {
         xp: 0,
         lastShootTime: 0,
     },
+    [UnitName.Threegun]: {
+        hp: 0,
+        maxHp: 0,
+        xp: 0,
+        lastShootTime: 0,
+    },
     [UnitName.Bazooka]: {
         hp: 0,
         maxHp: 0,
@@ -196,6 +210,7 @@ export const UnitMoney: {
     [UnitName.Bubble]: 50,
     [UnitName.Piston]: 0,
     [UnitName.Machinegun]: 0,
+    [UnitName.Threegun]: 0,
     [UnitName.Bazooka]: 0,
     [UnitName.Tower]: 0,
 };
@@ -233,6 +248,7 @@ export const defaultConstructorState: MyasoStore = {
         [UnitName.Piston]: true,
         [UnitName.Bazooka]: false,
         [UnitName.Machinegun]: false,
+        [UnitName.Threegun]: false,
     },
     weapon: UnitName.Piston,
     showShopMenu: false,
