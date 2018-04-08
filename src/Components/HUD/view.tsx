@@ -1,13 +1,23 @@
 import * as React from 'react';
 import {MyasoStore, Player} from '../../Store/MyasoStore';
-import {connect, MapStateToPropsFactory} from 'react-redux';
+import {connect, MapDispatchToPropsFunction, MapStateToPropsFactory} from 'react-redux';
 import ProgressBar from "../Common/ProgressBar/view";
 import {getNextLevelXp} from '../../utils/playerInteractions';
 import * as styles from './style.pcss';
+import {toggleMenu} from "../../Store/actions";
 
-export type HudProps = {
-    player: Player,
+type StateToProps = {
+    player: Player;
+    showShopMenu: boolean;
 }
+
+type DispatchToProps = {
+    toggleShopMenu: (show: boolean) => void;
+}
+
+export type HudProps =
+    StateToProps
+    & DispatchToProps;
 
 class Hud extends React.Component<HudProps, {}> {
     public render() {
@@ -26,19 +36,28 @@ class Hud extends React.Component<HudProps, {}> {
                     </div>
                 </div>
                 <div className={styles.Hud__money}>
-                    <div>Money: {player.money}</div>
+                    <div className={styles.Hud__money__label}>Money: {player.money}</div><br/>
+                    <div className={styles.Hud__money__button} onClick={() => this.props.toggleShopMenu(!this.props.showShopMenu)}>{this.props.showShopMenu ? "-" : "+"} buy</div>
                 </div>
             </div>
         );
     }
 }
 
-const mapStateToPropsFactory: MapStateToPropsFactory<HudProps, {}, MyasoStore> = (initialStore, initialOwnProps) => {
-    return ({player}, ownProps): HudProps => {
+const mapStateToPropsFactory: MapStateToPropsFactory<StateToProps, {}, MyasoStore> = (initialStore, initialOwnProps) => {
+    return ({player, showShopMenu}, ownProps): StateToProps => {
         return {
             player,
+            showShopMenu,
         };
     };
 };
 
-export default connect(mapStateToPropsFactory)(Hud);
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchToProps, {}> =
+    (dispatch, ownProps): DispatchToProps => {
+        return {
+            toggleShopMenu: show => {dispatch(toggleMenu(show))},
+        };
+    };
+
+export default connect(mapStateToPropsFactory, mapDispatchToProps)(Hud);
