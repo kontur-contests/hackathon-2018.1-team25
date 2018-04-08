@@ -111,7 +111,9 @@ function createAnimaionConstoller(store: Store<MyasoStore>) {
                     ...point,
                     width: 1,
                     height: 1,
-                    destination: shotPosition,
+                    destination: nextState.weapon === UnitName.Bazooka
+                        ? shotPosition
+                        : getPointRelativeToOriginByAngleAndDistance(75, angle),
                     rotation: getAngleRelativeToOrigin(shotPosition),
                     name: nextState.weapon,
                     intersection: true,
