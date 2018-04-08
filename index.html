@@ -1,34 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8">
-	<!--TODO: favicon.ico-->
-	<title>Tower Shooter</title>
-	<style>
-		html, body, #container {
-			position: relative;
-			height: 100%;
-			width: 100%;
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-			cursor: url(images/cursor-scope.png), default;
-			user-select: none;
-		}
-		.pointer {
-			cursor: url(images/pointer.png), pointer;
-		}
-	</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <!--TODO: favicon.ico-->
+    <title>Tower Shooter</title>
+    <style>
+        html, body, #container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            cursor: url(images/cursor-scope.png), default;
+            user-select: none;
+        }
+
+        .pointer {
+            cursor: url(images/pointer.png), pointer;
+        }
+
+        .screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .screen > img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -250px;
+        }
+    </style>
 </head>
 <body>
 <div id="container"></div>
-<div id="start_page"></div>
+<div id="start_page" class="screen">
+    <img src="./images/start.png">
+</div>
+<div id="end_page" class="screen" style="display: none;">
+    <img src="./images/end.png">
+</div>
 <script src="./dist/costructor.js"></script>
 <script>
-	const startPage = document.getElementById('start_page');
+    const startPage = document.getElementById('start_page');
+    const endPage = document.getElementById('end_page');
+    createMyaso(document.getElementById('container'));
 
-  createMyaso(document.getElementById('container'));
+    function gameOVER() {
+        endPage.style.display = 'block';
+    }
+
+    startPage.addEventListener('click', function () {
+        startPage.style.display = 'none';
+        const container = document.getElementById('container');
+        console.log(container);
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+        }
+        startGame();
+    });
+
+    endPage.addEventListener('click', function () {
+        location.reload();
+    });
 </script>
 </body>
 </html>
