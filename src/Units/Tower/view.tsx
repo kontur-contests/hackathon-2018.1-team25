@@ -13,6 +13,13 @@ export class Tower extends UnitClass<UnitName.Tower> {
         } = this.props;
 
         return <div className={ c.Tower }>
+            <img
+                src="./images/tower.png"
+                style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+            />
             <div
                 className={ c.Tower__weapon }
                 style={ {
