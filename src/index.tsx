@@ -23,8 +23,8 @@ import { getAngleRelativeToOrigin } from './utils/getAngleRelativeToOrigin';
 import { getPointRelativeToOriginByAngleAndDistance } from './utils/getPointRelativeToOriginByAngleAndDistance';
 import {addXp, getNextLevelHp} from './utils/playerInteractions';
 import { playSound, SoundName } from './utils/startStopAudio';
-// import {runAudio} from './utils/runAudio';
-// runAudio();
+import {runAudio} from './utils/runAudio';
+(window as any).runAudio = runAudio;
 
 declare const gameOVER: () => void;
 

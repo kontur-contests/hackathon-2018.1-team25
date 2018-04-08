@@ -1,6 +1,6 @@
 let count = 0;
 const audio = new Audio();
-audio.volume = 0.6;
+audio.volume = 0.2;
 
 export function runAudio(){
     const playlist = [
