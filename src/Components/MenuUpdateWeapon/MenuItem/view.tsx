@@ -14,7 +14,11 @@ class MenuItem extends React.Component<MenuItemProps> {
         return (
           <div className={cn(styles.MenuItem, this.props.isLast ? null : styles.MenuItem__padding)} onClick={this.handleClick}>
               <div className={cn(styles.MenuItem__element, this.props.chosen ? styles.MenuItem__element__chosen : null)} style={{backgroundImage: `url(${this.props.imageUrl})`}}>
-                  {!this.props.bought && !enabled && <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}/>}
+                  {!this.props.bought && !enabled &&
+                    <div className={styles.MenuItem__element__overlay} onClick={e => e.stopPropagation()}>
+                        <div className={styles.MenuItem__element__overlay__price}>Cost: {this.props.cost}</div>
+                    </div>
+                  }
               </div>
           </div>
         );
@@ -30,6 +34,7 @@ type MenuConnectedProps = {
     chosen: boolean;
     bought: boolean;
     isLast?: boolean | undefined;
+    cost: number;
     enabled: (player: Player) => boolean;
     action: () => void;
 }
