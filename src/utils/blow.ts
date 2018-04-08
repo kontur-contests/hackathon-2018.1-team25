@@ -15,6 +15,7 @@ export function blow({
     image.src = blowImageSrc + '?' + Math.random();
 
     image.style.position = 'absolute';
+
     image.style.width = `${width / 3}%`;
     image.style.height = `${height / 3}%`;
     image.style.top = `${(y + 150) / 3}%`;
